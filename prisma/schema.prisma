@@ -1,0 +1,234 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id              String      @id @default(cuid())
+  name            String?
+  email           String?     @unique
+  emailVerified   DateTime?
+  image           String?
+  phone           String?     @unique
+
+  role            Role        @default(USER)
+
+  createdAt       DateTime    @default(now())
+
+  addresses       Address[]
+  orders          Order[]
+
+  wishlists Wishlist[]
+
+  reviews Review[]
+
+  preference UserPreference?
+
+  accounts        Account[]
+  sessions        Session[]
+}
+
+model Address {
+  id          String @id @default(cuid())
+
+  userId      String
+
+  fullName    String
+  phone       String
+  city        String
+  state       String
+  pincode     String
+  street      String
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Product {
+
+  id           String @id @default(cuid())
+
+  name         String
+  slug         String @unique
+  description  String
+
+  price        Float
+  stock        Int
+
+  featured     Boolean @default(false)
+
+  category     String
+
+  images       String[]
+
+  createdAt    DateTime @default(now())
+
+  orderItems   OrderItem[]
+
+  reviews Review[]
+
+  wishlists    Wishlist[]
+
+}
+
+model Order {
+  id            String @id @default(cuid())
+
+  userId        String
+  totalAmount   Float
+
+  paymentId     String?
+  orderId       String?
+  signature     String?
+
+  status OrderStatus @default(PENDING)
+
+  fullName      String
+  phone         String
+  street        String
+  city          String
+  state         String
+  pincode       String
+
+  createdAt     DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  items OrderItem[]
+}
+
+model OrderItem {
+  id String @id @default(cuid())
+
+  quantity Int
+  price Float
+
+  orderId String
+  productId String
+
+  order Order @relation( fields: [orderId], references: [id])
+
+  product Product @relation( fields: [productId], references: [id])
+}
+
+model Account {
+  id                 String @id @default(cuid())
+
+  userId             String
+
+  type               String
+  provider           String
+  providerAccountId  String
+
+  refresh_token      String?
+  access_token       String?
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id             String @id @default(cuid())
+
+  sessionToken   String @unique
+
+  userId         String
+
+  expires        DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Wishlist {
+
+  id String @id @default(cuid())
+
+  userId String
+
+  productId String
+
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+
+}
+
+model UserPreference {
+
+  id String @id @default(cuid())
+
+  userId String @unique
+
+  favoriteColor String?
+  favoriteCategory String?
+  budget String?
+
+  fashionStyle String?
+
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  PACKED
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+model Review {
+
+  id String @id @default(cuid())
+
+  rating Int
+
+  comment String
+
+  createdAt DateTime @default(now())
+
+  userId String
+  productId String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+}
+
+model Coupon {
+
+  id String @id @default(cuid())
+
+  code String @unique
+
+  discount Int
+
+  active Boolean @default(true)
+
+  expiresAt DateTime
+
+  createdAt DateTime @default(now())
+
+}
