@@ -1,30 +1,16 @@
 import { Resend } from "resend";
 
-const resend =
-  new Resend(
-    process.env.RESEND_API_KEY
-  );
-
 export async function sendOrderEmail({
-
   to,
-
   subject,
-
   message
-
 }: {
-
   to: string;
-
   subject: string;
-
   message: string;
-
 }) {
-
   try {
-
+    const resend = new Resend(process.env.RESEND_API_KEY || "re_dummy");
     await resend.emails.send({
 
       from:
