@@ -1,96 +1,188 @@
 import Link from "next/link";
+
 type SearchParams = Promise<{
-id?:string
+  id?: string;
 }>;
 
 export default async function OrderSuccess({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) {
+  const params =
+    await searchParams;
 
-searchParams
+  return (
+    <main
+      className="
+        min-h-screen
+        bg-[#F8F3EA]
+        pt-32
+        pb-24
+        px-6
+      "
+    >
+      <div
+        className="
+          max-w-3xl
+          mx-auto
+          text-center
+        "
+      >
+        {/* SUCCESS ICON */}
 
-}:{
+        <div
+          className="
+            w-24
+            h-24
+            mx-auto
+            rounded-full
+            bg-green-100
+            flex
+            items-center
+            justify-center
+            text-5xl
+          "
+        >
+          ✓
+        </div>
 
-searchParams:
-SearchParams
+        {/* TAG */}
 
-}){
+        <p
+          className="
+            section-tag
+            mt-10
+            mb-4
+          "
+        >
+          Order Confirmed
+        </p>
 
-const params=
-await searchParams;
+        {/* TITLE */}
 
-return(
+        <h1
+          className="
+            font-brand
+            text-5xl
+            md:text-6xl
+            text-[#2A2A2A]
+          "
+        >
+          Thank You
+          <br />
+          For Your Purchase
+        </h1>
 
-<div
-className="
-min-h-screen
-flex
-items-center
-justify-center
-"
->
+        {/* MESSAGE */}
 
-<div
-className="
-text-center
-max-w-lg
-"
->
+        <p
+          className="
+            mt-8
+            text-[#6B6B6B]
+            text-lg
+            leading-8
+            max-w-xl
+            mx-auto
+          "
+        >
+          Your order has been successfully placed.
+          We are preparing your Charukala
+          collection for dispatch and will keep
+          you updated throughout the journey.
+        </p>
 
-<h1
-className="
-text-5xl
-font-bold
-text-green-600
-mb-6
-"
->
+        {/* ORDER ID */}
 
-Payment Successful 🎉
+        <div
+          className="
+            mt-10
+            bg-white
+            rounded-2xl
+            p-6
+            border
+            border-[#E8DCC4]
+          "
+        >
+          <p
+            className="
+              text-sm
+              uppercase
+              tracking-widest
+              text-[#6B6B6B]
+            "
+          >
+            Order Reference
+          </p>
 
-</h1>
+          <p
+            className="
+              mt-2
+              text-xl
+              font-semibold
+              text-[#7A0019]
+              break-all
+            "
+          >
+            {params.id}
+          </p>
+        </div>
 
-<p
-className="
-text-lg
-mb-6
-"
->
+        {/* ACTIONS */}
 
-Your order has been placed successfully.
+        <div
+          className="
+            flex
+            flex-col
+            md:flex-row
+            justify-center
+            gap-4
+            mt-12
+          "
+        >
+          <Link
+            href={`/api/invoice/${params.id}`}
+            className="
+              btn-primary
+            "
+          >
+            Download Invoice
+          </Link>
 
-</p>
+          <Link
+            href="/orders"
+            className="
+              btn-secondary
+            "
+          >
+            View Orders
+          </Link>
 
-<p
-className="
-text-gray-500
-mb-8
-"
->
+          <Link
+            href="/products"
+            className="
+              btn-secondary
+            "
+          >
+            Continue Shopping
+          </Link>
+        </div>
 
-Order ID:
+        {/* INFO */}
 
-{params.id}
-
-</p>
-
-<Link
-href="/products"
-className="
-bg-[#8a1538]
-text-white
-px-8
-py-4
-rounded-full
-"
->
-
-Continue Shopping
-
-</Link>
-
-</div>
-
-</div>
-
-);
-
+        <div
+          className="
+            mt-16
+            text-[#6B6B6B]
+            text-sm
+          "
+        >
+          <p>
+            A confirmation has been recorded for
+            your order and payment.
+          </p>
+        </div>
+      </div>
+    </main>
+  );
 }

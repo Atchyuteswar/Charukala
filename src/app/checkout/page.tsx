@@ -54,7 +54,7 @@ export default function CheckoutPage() {
       !formData.pincode
     ) {
       alert(
-        "Please fill all fields"
+        "Please complete all required fields."
       );
 
       return;
@@ -68,12 +68,10 @@ export default function CheckoutPage() {
           "/api/payment/create-order",
           {
             method: "POST",
-
             headers: {
               "Content-Type":
                 "application/json",
             },
-
             body: JSON.stringify({
               amount:
                 totalAmount,
@@ -105,7 +103,7 @@ export default function CheckoutPage() {
           "Charukala",
 
         description:
-          "Order Payment",
+          "Charukala Order",
 
         order_id:
           paymentData.id,
@@ -118,86 +116,75 @@ export default function CheckoutPage() {
             formData.phone,
         },
 
-        handler: async function (
-  response: { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string }
-) {
+        handler:
+          async function (
+            response: {
+              razorpay_order_id: string;
+              razorpay_payment_id: string;
+              razorpay_signature: string;
+            }
+          ) {
+            try {
+              const verifyRes =
+                await fetch(
+                  "/api/payment/verify",
+                  {
+                    method: "POST",
 
-try {
+                    headers: {
+                      "Content-Type":
+                        "application/json",
+                    },
 
-const verifyRes =
-await fetch(
-"/api/payment/verify",
-{
+                    body: JSON.stringify({
+                      razorpay_order_id:
+                        response.razorpay_order_id,
 
-method:"POST",
+                      razorpay_payment_id:
+                        response.razorpay_payment_id,
 
-headers:{
-"Content-Type":
-"application/json"
-},
+                      razorpay_signature:
+                        response.razorpay_signature,
 
-body:JSON.stringify({
+                      items,
 
-razorpay_order_id:
-response.razorpay_order_id,
+                      totalAmount,
 
-razorpay_payment_id:
-response.razorpay_payment_id,
+                      shippingData:
+                        formData,
+                    }),
+                  }
+                );
 
-razorpay_signature:
-response.razorpay_signature,
+              const result =
+                await verifyRes.json();
 
-items,
+              if (
+                !verifyRes.ok
+              ) {
+                throw new Error(
+                  result.error
+                );
+              }
 
-totalAmount,
+              clearCart();
 
-shippingData:
-formData
+              window.location.href =
+                `/order-success?id=${result.order.id}`;
+            } catch (error) {
+              console.log(
+                error
+              );
 
-})
-
-}
-
-);
-
-const result =
-await verifyRes.json();
-
-if(!verifyRes.ok){
-
-throw new Error(
-result.error
-);
-
-}
-
-alert(
-"Order placed successfully"
-);
-
-clearCart();
-
-window.location.href=
-`/order-success?id=${result.order.id}`;
-
-}
-catch(error){
-
-console.log(
-error
-);
-
-alert(
-"Payment verification failed"
-);
-
-}
-
-},
+              alert(
+                "Payment verification failed."
+              );
+            }
+          },
 
         theme: {
           color:
-            "#8a1538",
+            "#7A0019",
         },
       };
 
@@ -207,99 +194,101 @@ alert(
         );
 
       razorpay.open();
-
     } catch (error) {
-
       console.log(error);
 
       alert(
-        "Payment initialization failed"
+        "Unable to initialize payment."
       );
-
     } finally {
-
       setLoading(false);
-
     }
   }
 
   return (
-    <div
+    <main
       className="
         min-h-screen
-        bg-[#f8f5f0]
-        pt-24
-        sm:pt-28
-        md:pt-20
-        pb-10
-        sm:pb-16
-        md:pb-20
+        bg-[#F8F3EA]
+        pt-32
+        pb-24
       "
     >
       <div
         className="
-          max-w-6xl
+          max-w-7xl
           mx-auto
-          px-4
-          sm:px-6
+          px-6
         "
       >
-
         {/* HEADER */}
 
-        <div className="mb-8 sm:mb-12">
-
+        <div
+          className="
+            mb-14
+          "
+        >
           <p
             className="
-              uppercase
-              tracking-[0.3em]
-              sm:tracking-[0.4em]
-              text-[#9b174c]
-              text-xs
-              sm:text-sm
+              section-tag
+              mb-4
             "
           >
-            Secure Payment
+            Secure Checkout
           </p>
 
           <h1
             className="
-              text-3xl
-              sm:text-4xl
-              md:text-5xl
-              font-black
-              mt-3
-              sm:mt-5
+              font-brand
+              text-5xl
+              md:text-6xl
+              text-[#2A2A2A]
             "
           >
-            Checkout
+            Complete Your Order
           </h1>
 
+          <p
+            className="
+              mt-4
+              text-[#6B6B6B]
+            "
+          >
+            Carefully review your details before proceeding to payment.
+          </p>
         </div>
 
         <div
           className="
             grid
-            grid-cols-1
-            lg:grid-cols-2
-            gap-6
-            sm:gap-8
-            md:gap-10
+            lg:grid-cols-[1fr_420px]
+            gap-10
           "
         >
+          {/* FORM */}
+
           <form
             onSubmit={handleSubmit}
             className="
-              space-y-3
-              sm:space-y-4
-              md:space-y-5
+              bg-white
+              rounded-2xl
+              p-8
+              space-y-5
             "
           >
+            <h2
+              className="
+                font-brand
+                text-3xl
+                mb-2
+              "
+            >
+              Shipping Information
+            </h2>
+
             <input
               placeholder="Full Name"
-              value={
-                formData.fullName
-              }
+              value={formData.fullName}
               onChange={(e) =>
                 setFormData({
                   ...formData,
@@ -310,23 +299,17 @@ alert(
               className="
                 w-full
                 border
-                border-gray-200
-                p-3
-                sm:p-4
+                border-[#E8DCC4]
                 rounded-xl
-                sm:rounded-2xl
+                px-4
+                py-4
                 outline-none
-                text-sm
-                sm:text-base
-                bg-white
               "
             />
 
             <input
-              placeholder="Phone"
-              value={
-                formData.phone
-              }
+              placeholder="Phone Number"
+              value={formData.phone}
               onChange={(e) =>
                 setFormData({
                   ...formData,
@@ -337,23 +320,17 @@ alert(
               className="
                 w-full
                 border
-                border-gray-200
-                p-3
-                sm:p-4
+                border-[#E8DCC4]
                 rounded-xl
-                sm:rounded-2xl
+                px-4
+                py-4
                 outline-none
-                text-sm
-                sm:text-base
-                bg-white
               "
             />
 
             <input
               placeholder="Street Address"
-              value={
-                formData.street
-              }
+              value={formData.street}
               onChange={(e) =>
                 setFormData({
                   ...formData,
@@ -364,24 +341,24 @@ alert(
               className="
                 w-full
                 border
-                border-gray-200
-                p-3
-                sm:p-4
+                border-[#E8DCC4]
                 rounded-xl
-                sm:rounded-2xl
+                px-4
+                py-4
                 outline-none
-                text-sm
-                sm:text-base
-                bg-white
               "
             />
 
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            <div
+              className="
+                grid
+                md:grid-cols-2
+                gap-4
+              "
+            >
               <input
                 placeholder="City"
-                value={
-                  formData.city
-                }
+                value={formData.city}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
@@ -390,25 +367,18 @@ alert(
                   })
                 }
                 className="
-                  w-full
                   border
-                  border-gray-200
-                  p-3
-                  sm:p-4
+                  border-[#E8DCC4]
                   rounded-xl
-                  sm:rounded-2xl
+                  px-4
+                  py-4
                   outline-none
-                  text-sm
-                  sm:text-base
-                  bg-white
                 "
               />
 
               <input
                 placeholder="State"
-                value={
-                  formData.state
-                }
+                value={formData.state}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
@@ -417,26 +387,19 @@ alert(
                   })
                 }
                 className="
-                  w-full
                   border
-                  border-gray-200
-                  p-3
-                  sm:p-4
+                  border-[#E8DCC4]
                   rounded-xl
-                  sm:rounded-2xl
+                  px-4
+                  py-4
                   outline-none
-                  text-sm
-                  sm:text-base
-                  bg-white
                 "
               />
             </div>
 
             <input
               placeholder="Pincode"
-              value={
-                formData.pincode
-              }
+              value={formData.pincode}
               onChange={(e) =>
                 setFormData({
                   ...formData,
@@ -447,35 +410,21 @@ alert(
               className="
                 w-full
                 border
-                border-gray-200
-                p-3
-                sm:p-4
+                border-[#E8DCC4]
                 rounded-xl
-                sm:rounded-2xl
+                px-4
+                py-4
                 outline-none
-                text-sm
-                sm:text-base
-                bg-white
               "
             />
 
             <button
               disabled={loading}
               className="
+                btn-primary
                 w-full
-                bg-[#8a1538]
-                text-white
-                py-4
-                sm:py-5
-                rounded-full
+                mt-4
                 disabled:opacity-50
-                text-sm
-                sm:text-base
-                font-semibold
-                hover:scale-[1.02]
-                transition
-                duration-500
-                mt-2
               "
             >
               {loading
@@ -484,95 +433,91 @@ alert(
             </button>
           </form>
 
-          <div
-            className="
-              bg-white
-              border
-              border-gray-200
-              rounded-[16px]
-              sm:rounded-[24px]
-              md:rounded-[30px]
-              p-5
-              sm:p-6
-              h-fit
-              sticky
-              top-24
-              sm:top-28
-            "
-          >
-            <h2
-              className="
-                text-xl
-                sm:text-2xl
-                font-bold
-                mb-4
-                sm:mb-6
-              "
-            >
-              Order Summary
-            </h2>
+          {/* SUMMARY */}
 
-            {items.map(
-              (item) => (
-                <div
-                  key={item.id}
-                  className="
-                    flex
-                    justify-between
-                    mb-3
-                    sm:mb-4
-                    text-sm
-                    sm:text-base
-                  "
-                >
-                  <div>
-                    <p className="font-medium line-clamp-1">
-                      {item.name}
-                    </p>
-
-                    <p
-                      className="
-                        text-xs
-                        sm:text-sm
-                        text-gray-500
-                      "
-                    >
-                      Qty:
-                      {
-                        item.quantity
-                      }
-                    </p>
-                  </div>
-
-                  <p className="font-semibold shrink-0 ml-4">
-                    ₹
-                    {item.price *
-                      item.quantity}
-                  </p>
-                </div>
-              )
-            )}
-
-            <hr className="my-4 sm:my-6" />
-
+          <div>
             <div
               className="
-                flex
-                justify-between
-                font-bold
-                text-lg
-                sm:text-xl
+                bg-white
+                rounded-2xl
+                p-8
+                sticky
+                top-28
               "
             >
-              <span>Total</span>
+              <h2
+                className="
+                  font-brand
+                  text-4xl
+                  mb-8
+                "
+              >
+                Order Summary
+              </h2>
 
-              <span>
-                ₹{totalAmount}
-              </span>
+              <div
+                className="
+                  space-y-5
+                "
+              >
+                {items.map(
+                  (item) => (
+                    <div
+                      key={item.id}
+                      className="
+                        flex
+                        justify-between
+                      "
+                    >
+                      <div>
+                        <p>
+                          {item.name}
+                        </p>
+
+                        <p
+                          className="
+                            text-sm
+                            text-[#6B6B6B]
+                          "
+                        >
+                          Qty: {item.quantity}
+                        </p>
+                      </div>
+
+                      <p>
+                        ₹
+                        {item.price *
+                          item.quantity}
+                      </p>
+                    </div>
+                  )
+                )}
+              </div>
+
+              <div
+                className="
+                  mt-8
+                  pt-6
+                  border-t
+                  border-[#E8DCC4]
+                  flex
+                  justify-between
+                  text-xl
+                  font-semibold
+                "
+              >
+                <span>
+                  Total
+                </span>
+
+                <span>
+                  ₹{totalAmount}
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

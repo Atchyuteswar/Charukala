@@ -4,7 +4,6 @@ import "./globals.css";
 
 import Navbar from "@/components/layout/Navbar";
 
-import AIStylist from "@/components/ai/AIStylist";
 import Footer from "@/components/layout/Footer";
 
 export const viewport: Viewport = {
@@ -19,7 +18,7 @@ export const metadata: Metadata = {
   title: "Charukala",
 
   description:
-    "Luxury AI Fashion Platform"
+    "Luxury Fashion Platform"
 
 };
 
@@ -33,13 +32,11 @@ export default function RootLayout({
 
     <html lang="en">
 
-      <body>
+      <body className="font-body">
 
         <Navbar />
 
         {children}
-
-        <AIStylist />
 
         <Footer />
 

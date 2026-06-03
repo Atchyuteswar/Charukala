@@ -1,68 +1,206 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+@import "tailwindcss";
+@source "../";
 :root {
 
---background:#ffffff;
+  /* Brand Colors */
 
---primary:#8B1E3F;
+  --charukala-maroon: #7A0019;
+  --charukala-gold: #D4A857;
+  --charukala-ivory: #F8F3EA;
+  --charukala-charcoal: #2A2A2A;
+  --charukala-gray: #6B6B6B;
 
---secondary:#E7C9A9;
+  /* Layout */
 
---accent:#F5F0EA;
-
---dark:#2D1B1B;
-
-}
-
-body{
-
-background:var(--background);
-
-font-family:var(--font-body);
-
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
-text-rendering: optimizeLegibility;
-overflow-x: hidden;
+  --container-width: 1280px;
 
 }
 
-h1,h2,h3,h4,h5{
+html {
+  scroll-behavior: smooth;
+}
 
-font-family:var(--font-heading);
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--charukala-ivory);
+  color: var(--charukala-charcoal);
+  overflow-x: hidden;
+}
+
+/* Typography */
+
+.font-brand {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.font-body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Container */
+
+.container-charukala {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Buttons */
+
+.btn-primary {
+
+  background-color: var(--charukala-maroon);
+  color: var(--charukala-gold);
+
+  padding: 0.875rem 2rem;
+
+  border-radius: 12px;
+
+  transition: all 0.3s ease;
+
+  font-weight: 600;
 
 }
 
-html{
-scroll-behavior:smooth;
+.btn-primary:hover {
+
+  opacity: 0.92;
+
+  transform: translateY(-2px);
+
 }
 
-/* Prevent horizontal overflow on mobile */
-*, *::before, *::after {
-  box-sizing: border-box;
+.btn-secondary {
+
+  border: 1px solid var(--charukala-maroon);
+
+  color: var(--charukala-maroon);
+
+  padding: 0.875rem 2rem;
+
+  border-radius: 12px;
+
+  transition: all 0.3s ease;
+
+  font-weight: 600;
+
 }
 
-/* Improve touch targets on mobile */
-@media (max-width: 768px) {
-  button, a, input, select, textarea {
-    min-height: 44px;
-  }
+.btn-secondary:hover {
+
+  background-color: var(--charukala-maroon);
+
+  color: white;
+
 }
 
-/* Better image handling */
-img {
-  max-width: 100%;
-  height: auto;
+/* Cards */
+
+.card-charukala {
+
+  background: white;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  transition: all 0.3s ease;
+
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.04),
+    0 4px 12px rgba(0,0,0,0.05);
+
 }
 
-/* Smooth scroll but respect motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+.card-charukala:hover {
+
+  transform: translateY(-4px);
+
 }
+
+/* Section Headings */
+
+.section-tag {
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.3em;
+
+  color: var(--charukala-gold);
+
+  font-size: 0.75rem;
+
+  font-weight: 600;
+
+}
+
+.section-title {
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: clamp(2.5rem, 6vw, 5rem);
+
+  line-height: 1;
+
+  font-weight: 700;
+
+  color: var(--charukala-charcoal);
+
+}
+
+.section-description {
+
+  color: var(--charukala-gray);
+
+  line-height: 1.8;
+
+  max-width: 700px;
+
+}
+
+/* Navbar */
+
+.nav-link {
+
+  font-size: 0.95rem;
+
+  font-weight: 500;
+
+  color: var(--charukala-charcoal);
+
+  transition: color 0.2s ease;
+
+}
+
+.nav-link:hover {
+
+  color: var(--charukala-maroon);
+
+}
+
+/* Product Title */
+
+.product-title {
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 1.75rem;
+
+  font-weight: 600;
+
+}
+
+.product-price {
+
+  color: var(--charukala-maroon);
+
+  font-weight: 700;
+
+  font-size: 1.25rem;
+
+}
+
+/* Scrollbar */

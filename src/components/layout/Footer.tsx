@@ -2,196 +2,193 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Footer() {
-
   return (
-
-    <footer className="bg-black text-white pt-12 sm:pt-16 md:pt-24 pb-8 sm:pb-12">
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-
+    <footer
+      className="
+        bg-[#F8F3EA]
+        border-t
+        border-[#E8DCC4]
+        pt-20
+        pb-10
+      "
+    >
+      <div
+        className="
+          max-w-7xl
+          mx-auto
+          px-6
+        "
+      >
         <div
           className="
             grid
-            grid-cols-1
-            sm:grid-cols-2
-            md:grid-cols-4
-            gap-8
-            sm:gap-10
-            md:gap-16
+            md:grid-cols-3
+            gap-16
           "
         >
-
           {/* BRAND */}
 
-          <div className="sm:col-span-2 md:col-span-1">
-
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black">
-              <Image 
-                src="/logo-main.png" 
-                alt="Charukala" 
-                width={160} 
-                height={40} 
-                className="w-auto h-8 sm:h-10 md:h-12 object-contain" 
-              />
-            </h2>
+          <div>
+            <Image
+              src="/logo-main.png"
+              alt="Charukala"
+              width={260}
+              height={60}
+              className="
+                h-14
+                w-auto
+                object-contain
+              "
+            />
 
             <p
               className="
-                text-white/60
-                mt-4
-                sm:mt-6
-                leading-7
-                sm:leading-8
-                text-sm
-                sm:text-base
+                mt-6
+                text-[#6B6B6B]
+                leading-8
+                max-w-sm
               "
             >
-              Celebrating timeless Indian craftsmanship through
-              luxurious handcrafted sarees.
+              Celebrating India&apos;s rich textile heritage
+              through thoughtfully curated sarees that
+              blend timeless craftsmanship with modern elegance.
             </p>
-
           </div>
 
-          {/* LINKS */}
+          {/* QUICK LINKS */}
 
           <div>
-
-            <h3 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6">
-              Collections
+            <h3
+              className="
+                font-brand
+                text-3xl
+                text-[#2A2A2A]
+                mb-6
+              "
+            >
+              Explore
             </h3>
 
-            <div className="flex flex-col gap-3 sm:gap-4 text-white/60 text-sm sm:text-base">
-
-              <Link href="/products">
-                Silk Sarees
+            <div
+              className="
+                flex
+                flex-col
+                gap-4
+              "
+            >
+              <Link
+                href="/"
+                className="
+                  text-[#6B6B6B]
+                  hover:text-[#7A0019]
+                  transition
+                "
+              >
+                Home
               </Link>
 
-              <Link href="/products">
-                Bridal Collection
+              <Link
+                href="/products"
+                className="
+                  text-[#6B6B6B]
+                  hover:text-[#7A0019]
+                  transition
+                "
+              >
+                Collections
               </Link>
 
-              <Link href="/products">
-                Festival Wear
-              </Link>
-
-            </div>
-
-          </div>
-
-          {/* SUPPORT */}
-
-          <div>
-
-            <h3 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6">
-              Support
-            </h3>
-
-            <div className="flex flex-col gap-3 sm:gap-4 text-white/60 text-sm sm:text-base">
-
-              <Link href="/orders">
+              <Link
+                href="/orders"
+                className="
+                  text-[#6B6B6B]
+                  hover:text-[#7A0019]
+                  transition
+                "
+              >
                 Orders
               </Link>
 
-              <Link href="/contact">
-                Contact Us
-              </Link>
-
-              <Link href="/shipping">
-                Shipping Policy
-              </Link>
-
-            </div>
-
-          </div>
-
-          {/* NEWSLETTER */}
-
-          <div className="sm:col-span-2 md:col-span-1">
-
-            <h3 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6">
-              Stay Updated
-            </h3>
-
-            <div className="flex max-w-md">
-
-              <input
-                type="email"
-                placeholder="Your email"
+              <Link
+                href="/profile"
                 className="
-                  bg-white/10
-                  border
-                  border-white/10
-                  px-4
-                  sm:px-5
-                  py-3
-                  sm:py-4
-                  rounded-l-full
-                  outline-none
-                  w-full
-                  min-w-0
-                  text-sm
-                  sm:text-base
-                "
-              />
-
-              <button
-                className="
-                  bg-[#9b174c]
-                  px-5
-                  sm:px-6
-                  rounded-r-full
-                  whitespace-nowrap
-                  text-sm
-                  sm:text-base
-                  shrink-0
+                  text-[#6B6B6B]
+                  hover:text-[#7A0019]
+                  transition
                 "
               >
-                Join
-              </button>
-
+                Profile
+              </Link>
             </div>
-
           </div>
 
+          {/* CUSTOMER CARE */}
+
+          <div>
+            <h3
+              className="
+                font-brand
+                text-3xl
+                text-[#2A2A2A]
+                mb-6
+              "
+            >
+              Customer Care
+            </h3>
+
+            <div
+              className="
+                flex
+                flex-col
+                gap-4
+                text-[#6B6B6B]
+              "
+            >
+              <p>
+                support@charukala.com
+              </p>
+
+              <p>
+                +91 XXXXX XXXXX
+              </p>
+
+              <p>
+                Secure Payments via Razorpay
+              </p>
+
+              <p>
+                Pan India Delivery
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* BOTTOM */}
 
         <div
           className="
+            mt-16
+            pt-8
             border-t
-            border-white/10
-            mt-12
-            sm:mt-16
-            md:mt-20
-            pt-6
-            sm:pt-8
+            border-[#E8DCC4]
             flex
             flex-col
             md:flex-row
             justify-between
-            gap-3
-            sm:gap-5
-            text-white/50
-            text-xs
-            sm:text-sm
+            gap-4
+            text-sm
+            text-[#6B6B6B]
           "
         >
-
           <p>
-            &copy; 2026 Charukala. All rights reserved.
+            © 2026 Charukala. All Rights Reserved.
           </p>
 
           <p>
-            Designed with elegance in India.
+            Crafted with elegance in India.
           </p>
-
         </div>
-
       </div>
-
     </footer>
-
   );
-
 }

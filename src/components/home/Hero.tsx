@@ -1,177 +1,233 @@
 "use client";
 
 import Image from "next/image";
-
 import Link from "next/link";
 
 export default function Hero() {
-
   return (
-
     <section
       className="
         relative
-        h-[100svh]
-        min-h-[600px]
-        overflow-hidden
+        min-h-screen
+        pt-20
+        bg-[#F8F3EA]
       "
     >
-
-      {/* BACKGROUND IMAGE */}
-
-      <Image
-        src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=1600&auto=format&fit=crop"
-        alt="Luxury Saree"
-        fill
-        sizes="100vw"
-        priority
-        className="object-cover"
-      />
-
-      {/* OVERLAY */}
-
       <div
         className="
-          absolute
-          inset-0
-          bg-black/50
-        "
-      />
-
-      {/* CONTENT */}
-
-      <div
-        className="
-          relative
-          z-10
-          h-full
-          flex
+          max-w-7xl
+          mx-auto
+          px-6
+          py-16
+          lg:py-24
+          grid
+          lg:grid-cols-2
+          gap-16
           items-center
         "
       >
+        {/* LEFT CONTENT */}
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
+        <div>
 
-          <div className="max-w-3xl">
+          <p
+            className="
+              uppercase
+              tracking-[0.35em]
+              text-[#D4A857]
+              text-xs
+              font-semibold
+              mb-6
+            "
+          >
+            Heritage • Elegance • Craftsmanship
+          </p>
 
-            <p
+          <h1
+            className="
+              font-brand
+              text-[#2A2A2A]
+              text-5xl
+              md:text-7xl
+              leading-none
+            "
+          >
+            Timeless Sarees
+            <br />
+            For Modern Women
+          </h1>
+
+          <p
+            className="
+              mt-8
+              text-[#6B6B6B]
+              text-lg
+              leading-8
+              max-w-xl
+            "
+          >
+            Discover handcrafted sarees inspired by
+            India&apos;s rich weaving traditions, designed
+            for celebrations, heritage, and everyday elegance.
+          </p>
+
+          <div
+            className="
+              flex
+              flex-wrap
+              gap-4
+              mt-10
+            "
+          >
+            <Link
+              href="/products"
               className="
-                uppercase
-                tracking-[0.3em]
-                sm:tracking-[0.5em]
-                text-[#f3c46b]
-                text-xs
-                sm:text-sm
+                btn-primary
               "
             >
-              AI Luxury Fashion
-            </p>
+              Explore Collection
+            </Link>
 
-            <h1
+            <Link
+              href="/products"
               className="
-                text-4xl
-                sm:text-5xl
-                md:text-7xl
-                lg:text-8xl
-                font-black
-                text-white
-                leading-none
-                mt-4
-                sm:mt-8
+                btn-secondary
               "
             >
-              Redefining
-              <br />
-              Saree Luxury
-            </h1>
-
-            <p
-              className="
-                text-white/70
-                text-base
-                sm:text-lg
-                md:text-xl
-                leading-7
-                sm:leading-9
-                mt-5
-                sm:mt-10
-                max-w-2xl
-              "
-            >
-              Experience AI-powered luxury
-              fashion with personalized
-              saree recommendations,
-              virtual styling,
-              and curated elegance.
-            </p>
-
-            <div
-              className="
-                flex
-                flex-col
-                sm:flex-row
-                gap-3
-                sm:gap-5
-                mt-8
-                sm:mt-12
-              "
-            >
-
-              <Link
-                href="/products"
-                className="
-                  bg-[#9b174c]
-                  text-white
-                  px-6
-                  sm:px-8
-                  py-4
-                  sm:py-5
-                  rounded-full
-                  hover:scale-105
-                  transition
-                  duration-500
-                  text-center
-                  text-sm
-                  sm:text-base
-                "
-              >
-                Explore Collection
-              </Link>
-
-              <Link
-                href="/virtual-tryon"
-                className="
-                  bg-white/10
-                  backdrop-blur-xl
-                  border
-                  border-white/20
-                  text-white
-                  px-6
-                  sm:px-8
-                  py-4
-                  sm:py-5
-                  rounded-full
-                  hover:bg-white/20
-                  transition
-                  duration-500
-                  text-center
-                  text-sm
-                  sm:text-base
-                "
-              >
-                Virtual Try-On
-              </Link>
-
-            </div>
-
+              View Catalogue
+            </Link>
           </div>
 
+          <div
+            className="
+              flex
+              gap-12
+              mt-16
+            "
+          >
+            <div>
+              <h3
+                className="
+                  text-3xl
+                  font-semibold
+                  text-[#7A0019]
+                "
+              >
+                500+
+              </h3>
+
+              <p
+                className="
+                  text-sm
+                  text-[#6B6B6B]
+                "
+              >
+                Premium Designs
+              </p>
+            </div>
+
+            <div>
+              <h3
+                className="
+                  text-3xl
+                  font-semibold
+                  text-[#7A0019]
+                "
+              >
+                100%
+              </h3>
+
+              <p
+                className="
+                  text-sm
+                  text-[#6B6B6B]
+                "
+              >
+                Authentic Craftsmanship
+              </p>
+            </div>
+
+            <div>
+              <h3
+                className="
+                  text-3xl
+                  font-semibold
+                  text-[#7A0019]
+                "
+              >
+                PAN
+              </h3>
+
+              <p
+                className="
+                  text-sm
+                  text-[#6B6B6B]
+                "
+              >
+                India Delivery
+              </p>
+            </div>
+          </div>
         </div>
 
+        {/* RIGHT IMAGE */}
+
+        <div
+          className="
+            relative
+          "
+        >
+          <div
+            className="
+              relative
+              h-[600px]
+              rounded-2xl
+              overflow-hidden
+            "
+          >
+            <Image
+              src="/hero-saree.jpg"
+              alt="Charukala Saree Collection"
+              fill
+              priority
+              className="
+                object-cover
+              "
+            />
+          </div>
+
+          <div
+            className="
+              absolute
+              -bottom-8
+              -left-8
+              bg-white
+              p-6
+              rounded-xl
+              shadow-md
+            "
+          >
+            <p
+              className="
+                text-sm
+                text-[#6B6B6B]
+              "
+            >
+              Featured Collection
+            </p>
+
+            <h3
+              className="
+                font-brand
+                text-2xl
+                mt-1
+              "
+            >
+              Bridal Heritage
+            </h3>
+          </div>
+        </div>
       </div>
-
     </section>
-
   );
-
 }

@@ -1,45 +1,40 @@
 import Image from "next/image";
 
 export default function StorySection() {
-
   return (
-
-    <section className="bg-[#111111] text-white py-16 sm:py-24 md:py-32 overflow-hidden">
-
+    <section
+      className="
+        bg-white
+        py-24
+        md:py-32
+        border-t
+        border-[#E8DCC4]
+      "
+    >
       <div
         className="
           max-w-7xl
           mx-auto
-          px-4
-          sm:px-6
+          px-6
           grid
-          grid-cols-1
           lg:grid-cols-2
-          gap-10
-          sm:gap-14
-          md:gap-20
+          gap-16
+          lg:gap-24
           items-center
         "
       >
-
         {/* LEFT IMAGE */}
-
         <div
           className="
             relative
-            h-[350px]
-            sm:h-[450px]
-            md:h-[550px]
-            lg:h-[700px]
-            rounded-[24px]
-            sm:rounded-[32px]
-            md:rounded-[40px]
+            h-[400px]
+            md:h-[600px]
+            rounded-2xl
             overflow-hidden
           "
         >
-
           <Image
-            src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&w=1400&auto=format&fit=crop"
+            src="/placeholder-saree.jpg"
             alt="Indian Craftsmanship"
             fill
             sizes="
@@ -48,28 +43,19 @@ export default function StorySection() {
             "
             className="
               object-cover
-              hover:scale-105
               transition
               duration-700
+              hover:scale-105
             "
           />
-
         </div>
 
         {/* RIGHT CONTENT */}
-
         <div>
-
           <p
             className="
-              uppercase
-              tracking-[0.3em]
-              sm:tracking-[0.4em]
-              text-[#f3c46b]
-              text-xs
-              sm:text-sm
-              mb-4
-              sm:mb-8
+              section-tag
+              mb-6
             "
           >
             Our Heritage
@@ -77,11 +63,10 @@ export default function StorySection() {
 
           <h2
             className="
-              text-3xl
-              sm:text-4xl
-              md:text-5xl
-              lg:text-7xl
-              font-black
+              font-brand
+              text-5xl
+              md:text-6xl
+              text-[#2A2A2A]
               leading-tight
             "
           >
@@ -92,74 +77,53 @@ export default function StorySection() {
 
           <p
             className="
-              text-white/70
-              text-base
-              sm:text-lg
-              leading-7
-              sm:leading-9
-              mt-5
-              sm:mt-10
+              text-[#6B6B6B]
+              text-lg
+              leading-8
+              mt-8
+              max-w-lg
             "
           >
             Charukala celebrates the artistry of Indian handwoven sarees,
             blending timeless craftsmanship with contemporary elegance.
-
             Every collection is carefully curated to preserve heritage while
             embracing the spirit of the modern woman.
           </p>
 
           {/* FEATURES */}
-
-          <div className="grid grid-cols-2 gap-5 sm:gap-8 mt-8 sm:mt-14">
-
+          <div className="grid grid-cols-2 gap-8 mt-12 pt-12 border-t border-[#E8DCC4]">
             <div>
-
               <h3
                 className="
-                  text-3xl
-                  sm:text-4xl
-                  md:text-5xl
-                  font-black
-                  text-[#f3c46b]
+                  text-4xl
+                  font-semibold
+                  text-[#7A0019]
                 "
               >
                 25+
               </h3>
-
-              <p className="text-white/60 mt-2 sm:mt-3 text-sm sm:text-base">
+              <p className="text-[#6B6B6B] mt-2 font-medium">
                 Years Of Craftsmanship
               </p>
-
             </div>
 
             <div>
-
               <h3
                 className="
-                  text-3xl
-                  sm:text-4xl
-                  md:text-5xl
-                  font-black
-                  text-[#f3c46b]
+                  text-4xl
+                  font-semibold
+                  text-[#7A0019]
                 "
               >
                 10k+
               </h3>
-
-              <p className="text-white/60 mt-2 sm:mt-3 text-sm sm:text-base">
+              <p className="text-[#6B6B6B] mt-2 font-medium">
                 Happy Customers
               </p>
-
             </div>
-
           </div>
-
         </div>
-
       </div>
-
     </section>
-
   );
-
 }

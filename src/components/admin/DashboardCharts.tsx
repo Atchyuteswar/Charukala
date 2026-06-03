@@ -1,96 +1,35 @@
 "use client";
 
-import {
-  LineChart,
-  Line,
-  XAxis,
-  Tooltip,
-  ResponsiveContainer
-} from "recharts";
-
-import { Order } from "@prisma/client";
+import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from "recharts";
 
 export default function DashboardCharts({
   orders
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: { orders: any[] }) {
-
-  const data =
-    orders.map((order: Order) => ({
-
-      name:
-        new Date(
-          order.createdAt
-        ).toLocaleDateString(),
-
-      revenue:
-        order.totalAmount
-
-    }));
+  const data = orders.map((order) => ({
+    name: new Date(order.createdAt).toLocaleDateString(),
+    revenue: order.totalAmount
+  }));
 
   return (
-
-    <div
-      className="
-        bg-white
-        rounded-[40px]
-        p-10
-        shadow-lg
-      "
-    >
-
-      <div className="mb-10">
-
-        <p
-          className="
-            uppercase
-            tracking-[0.4em]
-            text-[#9b174c]
-            text-sm
-          "
-        >
-          Analytics
-        </p>
-
-        <h2
-          className="
-            text-4xl
-            font-black
-            mt-4
-          "
-        >
-          Revenue Overview
-        </h2>
-
-      </div>
-
-      <div className="h-[400px]">
-
-        <ResponsiveContainer
-          width="100%"
-          height="100%"
-        >
-
-          <LineChart data={data}>
-
-            <XAxis dataKey="name" />
-
-            <Tooltip />
-
-            <Line
-              type="monotone"
-              dataKey="revenue"
-              stroke="#9b174c"
-              strokeWidth={4}
-            />
-
-          </LineChart>
-
-        </ResponsiveContainer>
-
-      </div>
-
+    <div className="h-[300px] w-full mt-4">
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+          <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} />
+          <Tooltip 
+            contentStyle={{ backgroundColor: '#fff', borderRadius: '8px', border: '1px solid #e5e7eb', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}
+            itemStyle={{ color: '#111827', fontWeight: 'bold' }}
+          />
+          <Line
+            type="monotone"
+            dataKey="revenue"
+            stroke="#4f46e5"
+            strokeWidth={3}
+            dot={{ r: 4, strokeWidth: 2, fill: "#fff" }}
+            activeDot={{ r: 6, strokeWidth: 0, fill: "#4f46e5" }}
+          />
+        </LineChart>
+      </ResponsiveContainer>
     </div>
-
   );
-
 }

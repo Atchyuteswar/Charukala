@@ -2,523 +2,340 @@
 
 import Link from "next/link";
 import Image from "next/image";
-
 import {
   ShoppingBag,
   Search,
   User,
-  Heart,
   Menu,
-  X
+  X,
 } from "lucide-react";
 
-import { motion, AnimatePresence } from "framer-motion";
-
-import { useSearchStore } from "@/store/search-store";
-
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Navbar() {
-
-  const { open } =
-    useSearchStore();
-
   const [mobileMenuOpen, setMobileMenuOpen] =
     useState(false);
 
   return (
-
     <>
-
-      {/* NAVBAR */}
-
       <header
         className="
           fixed
           top-0
           left-0
-          w-full
+          right-0
           z-50
-          backdrop-blur-xl
-          bg-black/20
+          bg-[#F8F3EA]
           border-b
-          border-white/10
-          animate-in
-          fade-in
-          slide-in-from-top-10
-          duration-700
+          border-[#E8DCC4]
         "
       >
-
         <div
           className="
             max-w-7xl
             mx-auto
-            px-4
-            sm:px-6
-            py-3
-            sm:py-5
-            grid
-            grid-cols-3
-            md:flex
-            md:items-center
-            md:justify-between
+            px-6
+            h-20
+            flex
+            items-center
+            justify-between
           "
         >
+          {/* LEFT NAV */}
 
-          {/* MOBILE MENU BUTTON */}
-          <div className="flex items-center justify-start md:hidden">
-            <button
-              onClick={() =>
-                setMobileMenuOpen(true)
-              }
-              className="
-                text-white
-                p-1
-                -ml-1
-              "
-              aria-label="Open menu"
-            >
-              <Menu size={24} />
-            </button>
-          </div>
-
-          {/* LOGO */}
-          <div className="flex items-center justify-center md:justify-start">
-            <Link
-              href="/"
-              className="
-                text-xl
-                sm:text-2xl
-                md:text-3xl
-                font-black
-                tracking-wide
-                text-white
-              "
-            >
-              <Image 
-                src="/logo-main.png" 
-                alt="Charukala" 
-                width={160} 
-                height={40} 
-                className="w-auto h-7 sm:h-9 md:h-10 object-contain" 
-                priority
-              />
-            </Link>
-          </div>
-
-          {/* DESKTOP NAV */}
-
-          <nav
+          <div
             className="
               hidden
-              md:flex
+              lg:flex
               items-center
-              gap-6
-              lg:gap-10
+              gap-8
+              flex-1
             "
           >
+            <Link
+              href="/"
+              className="nav-link"
+            >
+              Home
+            </Link>
 
             <Link
               href="/products"
-              className="
-                text-white/80
-                hover:text-white
-                transition
-                text-sm
-                lg:text-base
-              "
+              className="nav-link"
             >
               Collections
             </Link>
 
             <Link
               href="/orders"
-              className="
-                text-white/80
-                hover:text-white
-                transition
-                text-sm
-                lg:text-base
-              "
+              className="nav-link"
             >
               Orders
             </Link>
+          </div>
 
-            <Link
-              href="/about"
+          {/* MOBILE MENU BUTTON */}
+
+          <button
+            onClick={() =>
+              setMobileMenuOpen(true)
+            }
+            className="
+              lg:hidden
+              text-[#2A2A2A]
+            "
+          >
+            <Menu
+              size={28}
+              strokeWidth={1.5}
+            />
+          </button>
+
+          {/* LOGO */}
+
+          <Link
+            href="/"
+            className="
+              absolute
+              left-1/2
+              -translate-x-1/2
+              flex
+              items-center
+              justify-center
+            "
+          >
+            <Image
+              src="/logo-main.png"
+              alt="Charukala"
+              width={420}
+              height={90}
+              priority
               className="
-                text-white/80
-                hover:text-white
-                transition
-                text-sm
-                lg:text-base
+                hidden
+                md:block
+                h-[58px]
+                w-auto
+                object-contain
               "
-            >
-              Heritage
-            </Link>
+            />
 
-            <Link
-              href="/contact"
+            <Image
+              src="/logo-main.png"
+              alt="Charukala"
+              width={260}
+              height={60}
+              priority
               className="
-                text-white/80
-                hover:text-white
-                transition
-                text-sm
-                lg:text-base
+                md:hidden
+                h-[42px]
+                w-auto
+                object-contain
               "
-            >
-              Contact
-            </Link>
+            />
+          </Link>
 
-          </nav>
-
-          {/* ACTIONS */}
+          {/* RIGHT */}
 
           <div
             className="
               flex
               items-center
               justify-end
-              gap-3
-              sm:gap-5
+              gap-5
+              flex-1
             "
           >
-
-            {/* SEARCH */}
-
-            <button
-
-              onClick={open}
-
-              className="
-                text-white/80
-                hover:text-white
-                transition
-                p-1
-              "
-              aria-label="Search"
-            >
-
-              <Search size={18} className="sm:w-5 sm:h-5" />
-
-            </button>
-
-            {/* WISHLIST */}
-
             <Link
-              href="/wishlist"
+              href="/products"
               className="
-                text-white/80
-                hover:text-white
+                text-[#2A2A2A]
+                hover:text-[#7A0019]
                 transition
-                p-1
               "
-              aria-label="Wishlist"
             >
-
-              <Heart size={18} className="sm:w-5 sm:h-5" />
-
+              <Search size={20} />
             </Link>
 
-            {/* CART */}
+            <Link
+              href="/profile"
+              className="
+                text-[#2A2A2A]
+                hover:text-[#7A0019]
+                transition
+              "
+            >
+              <User size={20} />
+            </Link>
 
             <Link
               href="/cart"
               className="
                 relative
-                text-white/80
-                hover:text-white
+                text-[#2A2A2A]
+                hover:text-[#7A0019]
                 transition
-                p-1
               "
-              aria-label="Cart"
             >
-
-              <ShoppingBag size={18} className="sm:w-5 sm:h-5" />
-
-              <span
-                className="
-                  absolute
-                  -top-1
-                  -right-1
-                  bg-[#9b174c]
-                  text-white
-                  text-[9px]
-                  sm:text-[10px]
-                  h-3.5
-                  w-3.5
-                  sm:h-4
-                  sm:w-4
-                  rounded-full
-                  flex
-                  items-center
-                  justify-center
-                "
-              >
-                0
-              </span>
-
+              <ShoppingBag size={20} />
             </Link>
-
-            {/* PROFILE */}
-
-            <Link
-              href="/profile"
-              className="
-                hidden
-                md:block
-                text-white/80
-                hover:text-white
-                transition
-                p-1
-              "
-              aria-label="Profile"
-            >
-
-              <User size={20} />
-
-            </Link>
-
           </div>
-
         </div>
-
       </header>
 
       {/* MOBILE MENU */}
 
       <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() =>
+                setMobileMenuOpen(false)
+              }
+              className="
+                fixed
+                inset-0
+                bg-black/30
+                z-[90]
+              "
+            />
 
-        {
-
-          mobileMenuOpen && (
-
-            <>
-
-              {/* BACKDROP */}
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() =>
-                  setMobileMenuOpen(false)
-                }
+            <motion.div
+              initial={{
+                x: "-100%",
+              }}
+              animate={{
+                x: 0,
+              }}
+              exit={{
+                x: "-100%",
+              }}
+              transition={{
+                duration: 0.25,
+              }}
+              className="
+                fixed
+                top-0
+                left-0
+                h-full
+                w-[85%]
+                max-w-[360px]
+                bg-[#F8F3EA]
+                z-[100]
+                p-8
+              "
+            >
+              <div
                 className="
-                  fixed
-                  inset-0
-                  z-[99]
-                  bg-black/50
-                "
-              />
-
-              {/* MENU PANEL */}
-
-              <motion.div
-
-                initial={{
-                  opacity: 0,
-                  x: "-100%"
-                }}
-
-                animate={{
-                  opacity: 1,
-                  x: 0
-                }}
-
-                exit={{
-                  opacity: 0,
-                  x: "-100%"
-                }}
-
-                transition={{
-                  duration: 0.4,
-                  ease: "easeOut"
-                }}
-
-                className="
-                  fixed
-                  inset-y-0
-                  left-0
-                  z-[100]
-                  w-[85vw]
-                  max-w-[360px]
-                  bg-[#111111]
-                  text-white
                   flex
-                  flex-col
-                  px-6
-                  sm:px-8
-                  py-6
-                  sm:py-8
-                  overflow-y-auto
+                  items-center
+                  justify-between
+                  mb-12
                 "
               >
-
-                {/* TOP */}
-
-                <div
+                <Image
+                  src="/logo-main.png"
+                  alt="Charukala"
+                  width={180}
+                  height={40}
                   className="
-                    flex
-                    items-center
-                    justify-between
-                    mb-10
+                    h-10
+                    w-auto
+                    object-contain
+                  "
+                />
+
+                <button
+                  onClick={() =>
+                    setMobileMenuOpen(false)
+                  }
+                >
+                  <X
+                    size={26}
+                    strokeWidth={1.5}
+                  />
+                </button>
+              </div>
+
+              <nav
+                className="
+                  flex
+                  flex-col
+                  gap-8
+                "
+              >
+                <Link
+                  href="/"
+                  onClick={() =>
+                    setMobileMenuOpen(false)
+                  }
+                  className="
+                    text-2xl
+                    font-brand
                   "
                 >
+                  Home
+                </Link>
 
-                  <h2
-                    className="
-                      text-2xl
-                      sm:text-3xl
-                      font-black
-                    "
-                  >
-                    <Image 
-                      src="/logo-main.png" 
-                      alt="Charukala" 
-                      width={150} 
-                      height={40} 
-                      className="w-auto h-8 sm:h-10 object-contain" 
-                    />
-                  </h2>
-
-                  <button
-
-                    onClick={() =>
-                      setMobileMenuOpen(false)
-                    }
-                    aria-label="Close menu"
-
-                  >
-
-                    <X size={26} />
-
-                  </button>
-
-                </div>
-
-                {/* LINKS */}
-
-                <div
+                <Link
+                  href="/products"
+                  onClick={() =>
+                    setMobileMenuOpen(false)
+                  }
                   className="
-                    flex
-                    flex-col
-                    gap-6
-                    sm:gap-8
+                    text-2xl
+                    font-brand
                   "
                 >
+                  Collections
+                </Link>
 
-                  <Link
-                    href="/products"
-                    onClick={() =>
-                      setMobileMenuOpen(false)
-                    }
-                    className="
-                      text-2xl
-                      sm:text-3xl
-                      font-black
-                      hover:text-[#f3c46b]
-                      transition
-                    "
-                  >
-                    Collections
-                  </Link>
+                <Link
+                  href="/orders"
+                  onClick={() =>
+                    setMobileMenuOpen(false)
+                  }
+                  className="
+                    text-2xl
+                    font-brand
+                  "
+                >
+                  Orders
+                </Link>
 
-                  <Link
-                    href="/wishlist"
-                    onClick={() =>
-                      setMobileMenuOpen(false)
-                    }
-                    className="
-                      text-2xl
-                      sm:text-3xl
-                      font-black
-                      hover:text-[#f3c46b]
-                      transition
-                    "
-                  >
-                    Wishlist
-                  </Link>
+                <Link
+                  href="/profile"
+                  onClick={() =>
+                    setMobileMenuOpen(false)
+                  }
+                  className="
+                    text-2xl
+                    font-brand
+                  "
+                >
+                  Profile
+                </Link>
 
-                  <Link
-                    href="/virtual-tryon"
-                    onClick={() =>
-                      setMobileMenuOpen(false)
-                    }
-                    className="
-                      text-2xl
-                      sm:text-3xl
-                      font-black
-                      hover:text-[#f3c46b]
-                      transition
-                    "
-                  >
-                    Virtual Try-On
-                  </Link>
-
-                  <Link
-                    href="/orders"
-                    onClick={() =>
-                      setMobileMenuOpen(false)
-                    }
-                    className="
-                      text-2xl
-                      sm:text-3xl
-                      font-black
-                      hover:text-[#f3c46b]
-                      transition
-                    "
-                  >
-                    Orders
-                  </Link>
-
-                  <Link
-                    href="/contact"
-                    onClick={() =>
-                      setMobileMenuOpen(false)
-                    }
-                    className="
-                      text-2xl
-                      sm:text-3xl
-                      font-black
-                      hover:text-[#f3c46b]
-                      transition
-                    "
-                  >
-                    Contact
-                  </Link>
-
-                  <Link
-                    href="/profile"
-                    onClick={() =>
-                      setMobileMenuOpen(false)
-                    }
-                    className="
-                      text-2xl
-                      sm:text-3xl
-                      font-black
-                      hover:text-[#f3c46b]
-                      transition
-                    "
-                  >
-                    Profile
-                  </Link>
-
-                </div>
-
-              </motion.div>
-
-            </>
-
-          )
-
-        }
-
+                <Link
+                  href="/cart"
+                  onClick={() =>
+                    setMobileMenuOpen(false)
+                  }
+                  className="
+                    text-2xl
+                    font-brand
+                  "
+                >
+                  Cart
+                </Link>
+              </nav>
+            </motion.div>
+          </>
+        )}
       </AnimatePresence>
-
     </>
-
   );
-
 }

@@ -25,10 +25,6 @@ interface CartStore {
 
   items: CartProduct[];
 
-  couponCode?: string;
-
-  discount?: number;
-
   addItem: (
     product: Omit<CartProduct, "quantity">
   ) => void;
@@ -47,21 +43,12 @@ interface CartStore {
     productId: string
   ) => void;
 
-  applyCoupon: (
-    code: string,
-    discount: number
-  ) => void;
-
 }
 
 export const useCartStore =
   create<CartStore>((set) => ({
 
     items: [],
-
-    couponCode: undefined,
-
-    discount: 0,
 
     // ADD ITEM
 
@@ -144,11 +131,7 @@ export const useCartStore =
 
       set({
 
-        items: [],
-
-        couponCode: undefined,
-
-        discount: 0
+        items: []
 
       }),
 
@@ -211,21 +194,6 @@ export const useCartStore =
                 item.quantity > 0
             )
 
-      })),
-
-    // APPLY COUPON
-
-    applyCoupon: (
-      code,
-      discount
-    ) =>
-
-      set({
-
-        couponCode: code,
-
-        discount
-
-      })
+      }))
 
   }));

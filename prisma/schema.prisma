@@ -27,12 +27,6 @@ model User {
   addresses       Address[]
   orders          Order[]
 
-  wishlists Wishlist[]
-
-  reviews Review[]
-
-  preference UserPreference?
-
   accounts        Account[]
   sessions        Session[]
 }
@@ -72,10 +66,6 @@ model Product {
   createdAt    DateTime @default(now())
 
   orderItems   OrderItem[]
-
-  reviews Review[]
-
-  wishlists    Wishlist[]
 
 }
 
@@ -153,42 +143,6 @@ model Session {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Wishlist {
-
-  id String @id @default(cuid())
-
-  userId String
-
-  productId String
-
-  createdAt DateTime @default(now())
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-
-  @@unique([userId, productId])
-
-}
-
-model UserPreference {
-
-  id String @id @default(cuid())
-
-  userId String @unique
-
-  favoriteColor String?
-  favoriteCategory String?
-  budget String?
-
-  fashionStyle String?
-
-  createdAt DateTime @default(now())
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-}
-
 enum OrderStatus {
   PENDING
   PAID
@@ -196,39 +150,4 @@ enum OrderStatus {
   SHIPPED
   DELIVERED
   CANCELLED
-}
-
-model Review {
-
-  id String @id @default(cuid())
-
-  rating Int
-
-  comment String
-
-  createdAt DateTime @default(now())
-
-  userId String
-  productId String
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-
-}
-
-model Coupon {
-
-  id String @id @default(cuid())
-
-  code String @unique
-
-  discount Int
-
-  active Boolean @default(true)
-
-  expiresAt DateTime
-
-  createdAt DateTime @default(now())
-
 }
