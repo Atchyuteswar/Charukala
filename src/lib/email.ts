@@ -14,7 +14,7 @@ export async function sendOrderEmail({
     await resend.emails.send({
 
       from:
-        "Charukala <onboarding@resend.dev>",
+        "Charukala <charukala@resend.dev>",
 
       to,
 
