@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 import ProductGallery from "@/components/product/ProductGallery";
 import AddToCartButton from "@/components/AddToCartButton";
 
