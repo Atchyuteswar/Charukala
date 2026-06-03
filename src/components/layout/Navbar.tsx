@@ -123,12 +123,12 @@ export default function Navbar() {
             <Image
               src="/logo-main.png"
               alt="Charukala"
-              width={260}
-              height={60}
+              width={160}
+              height={40}
               priority
               className="
                 md:hidden
-                h-[42px]
+                h-[32px]
                 w-auto
                 object-contain
               "
@@ -142,7 +142,8 @@ export default function Navbar() {
               flex
               items-center
               justify-end
-              gap-5
+              gap-3
+              md:gap-5
               flex-1
             "
           >
