@@ -20,7 +20,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F3EA] flex">
+    <div className="min-h-screen bg-[#F8F3EA] flex pt-20">
       {/* SIDEBAR */}
       <aside className="w-64 bg-white border-r border-[#E8DCC4] flex flex-col hidden md:flex">
         <div className="h-16 flex items-center px-6 border-b border-[#E8DCC4]">
