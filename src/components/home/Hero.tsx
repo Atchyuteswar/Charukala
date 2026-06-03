@@ -199,10 +199,13 @@ export default function Hero() {
           <div
             className="
               absolute
-              -bottom-8
-              -left-8
+              -bottom-4
+              left-4
+              md:-bottom-8
+              md:-left-8
               bg-white
-              p-6
+              p-4
+              md:p-6
               rounded-xl
               shadow-md
             "

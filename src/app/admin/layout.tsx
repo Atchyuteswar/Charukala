@@ -49,9 +49,29 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       </aside>
 
       {/* MAIN CONTENT */}
-      <main className="flex-1 overflow-x-hidden">
+      <main className="flex-1 overflow-x-hidden pb-20 md:pb-0">
         {children}
       </main>
+
+      {/* MOBILE BOTTOM NAV */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-[#E8DCC4] flex justify-around p-3 z-50">
+          <Link href="/admin" className="flex flex-col items-center text-[#6B6B6B] hover:text-[#7A0019]">
+            <LayoutDashboard size={22} />
+            <span className="text-[10px] mt-1 font-medium">Dashboard</span>
+          </Link>
+          <Link href="/admin/products" className="flex flex-col items-center text-[#6B6B6B] hover:text-[#7A0019]">
+            <Package size={22} />
+            <span className="text-[10px] mt-1 font-medium">Products</span>
+          </Link>
+          <Link href="/admin/orders" className="flex flex-col items-center text-[#6B6B6B] hover:text-[#7A0019]">
+            <ShoppingBag size={22} />
+            <span className="text-[10px] mt-1 font-medium">Orders</span>
+          </Link>
+          <Link href="/" className="flex flex-col items-center text-[#6B6B6B] hover:text-[#7A0019]">
+            <LogOut size={22} />
+            <span className="text-[10px] mt-1 font-medium">Exit</span>
+          </Link>
+      </nav>
     </div>
   );
 }
