@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { Product } from "@prisma/client";
+import { Product } from "@/generated/prisma/client";
 
 export default function EditProductForm({
 product

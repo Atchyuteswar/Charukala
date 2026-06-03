@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { Product } from "@prisma/client";
+import { Product } from "@/generated/prisma/client";
 import { ShoppingBag, Check } from "lucide-react";
 
 import { useCartStore } from "@/store/cart-store";
