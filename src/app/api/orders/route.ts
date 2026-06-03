@@ -86,7 +86,7 @@ const order = await prisma.order.create({
 
       create:
         body.items.map(
-          (item: any) => ({
+          (item: { quantity: number; price: number; id: string }) => ({
 
             quantity:
               item.quantity,

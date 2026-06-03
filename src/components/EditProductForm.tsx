@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 
+import { Product } from "@prisma/client";
+
 export default function EditProductForm({
 product
 }:{
-product:any
+product: Product
 }){
 
 const [loading,setLoading]=

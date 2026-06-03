@@ -8,12 +8,14 @@ import {
   ResponsiveContainer
 } from "recharts";
 
+import { Order } from "@prisma/client";
+
 export default function DashboardCharts({
   orders
-}: any) {
+}: { orders: any[] }) {
 
   const data =
-    orders.map((order: any) => ({
+    orders.map((order: Order) => ({
 
       name:
         new Date(

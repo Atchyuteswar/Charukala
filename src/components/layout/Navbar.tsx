@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 import {
   ShoppingBag,
@@ -31,22 +32,7 @@ export default function Navbar() {
 
       {/* NAVBAR */}
 
-      <motion.header
-
-        initial={{
-          y: -100,
-          opacity: 0
-        }}
-
-        animate={{
-          y: 0,
-          opacity: 1
-        }}
-
-        transition={{
-          duration: 0.7
-        }}
-
+      <header
         className="
           fixed
           top-0
@@ -57,6 +43,10 @@ export default function Navbar() {
           bg-black/20
           border-b
           border-white/10
+          animate-in
+          fade-in
+          slide-in-from-top-10
+          duration-700
         "
       >
 
@@ -68,47 +58,54 @@ export default function Navbar() {
             sm:px-6
             py-3
             sm:py-5
-            flex
-            items-center
-            justify-between
+            grid
+            grid-cols-3
+            md:flex
+            md:items-center
+            md:justify-between
           "
         >
 
           {/* MOBILE MENU BUTTON */}
-
-          <button
-
-            onClick={() =>
-              setMobileMenuOpen(true)
-            }
-
-            className="
-              md:hidden
-              text-white
-              p-1
-            "
-            aria-label="Open menu"
-          >
-
-            <Menu size={24} />
-
-          </button>
+          <div className="flex items-center justify-start md:hidden">
+            <button
+              onClick={() =>
+                setMobileMenuOpen(true)
+              }
+              className="
+                text-white
+                p-1
+                -ml-1
+              "
+              aria-label="Open menu"
+            >
+              <Menu size={24} />
+            </button>
+          </div>
 
           {/* LOGO */}
-
-          <Link
-            href="/"
-            className="
-              text-xl
-              sm:text-2xl
-              md:text-3xl
-              font-black
-              tracking-wide
-              text-white
-            "
-          >
-            Charukala
-          </Link>
+          <div className="flex items-center justify-center md:justify-start">
+            <Link
+              href="/"
+              className="
+                text-xl
+                sm:text-2xl
+                md:text-3xl
+                font-black
+                tracking-wide
+                text-white
+              "
+            >
+              <Image 
+                src="/logo-main.png" 
+                alt="Charukala" 
+                width={160} 
+                height={40} 
+                className="w-auto h-7 sm:h-9 md:h-10 object-contain" 
+                priority
+              />
+            </Link>
+          </div>
 
           {/* DESKTOP NAV */}
 
@@ -182,6 +179,7 @@ export default function Navbar() {
             className="
               flex
               items-center
+              justify-end
               gap-3
               sm:gap-5
             "
@@ -286,7 +284,7 @@ export default function Navbar() {
 
         </div>
 
-      </motion.header>
+      </header>
 
       {/* MOBILE MENU */}
 
@@ -376,7 +374,13 @@ export default function Navbar() {
                       font-black
                     "
                   >
-                    Charukala
+                    <Image 
+                      src="/logo-main.png" 
+                      alt="Charukala" 
+                      width={150} 
+                      height={40} 
+                      className="w-auto h-8 sm:h-10 object-contain" 
+                    />
                   </h2>
 
                   <button

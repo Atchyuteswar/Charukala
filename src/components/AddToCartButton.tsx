@@ -1,11 +1,12 @@
 "use client";
 
 import { useCartStore } from "@/store/cart-store";
+import { Product } from "@prisma/client";
 
 export default function AddToCartButton({
   product,
 }: {
-  product: any;
+  product: Product;
 }) {
 
   const addItem =
@@ -16,19 +17,13 @@ export default function AddToCartButton({
   function handleAddToCart() {
 
     addItem({
-
       id: product.id,
-
       name: product.name,
-
       price: product.price,
-
-      image:
-        product.images?.[0] ||
-        "",
-
-      quantity: 1,
-
+      images: product.images,
+      slug: product.slug,
+      description: product.description,
+      stock: product.stock,
     });
 
     alert(

@@ -8,16 +8,18 @@ from "@/components/product/ProductFilters";
 
 export default async function ProductsPage({
   searchParams
-}: any) {
+}: { searchParams: Promise<{ search?: string; category?: string; sort?: string }> }) {
+  
+  const resolvedParams = await searchParams;
 
   const search =
-    searchParams.search || "";
+    resolvedParams.search || "";
 
   const category =
-    searchParams.category || "";
+    resolvedParams.category || "";
 
   const sort =
-    searchParams.sort || "";
+    resolvedParams.sort || "";
 
   // PRODUCTS
 

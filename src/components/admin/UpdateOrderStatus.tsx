@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function UpdateOrderStatus({
   orderId,
   currentStatus
-}: any) {
+}: { orderId: string; currentStatus: string }) {
 
   const [status, setStatus] =
     useState(currentStatus);

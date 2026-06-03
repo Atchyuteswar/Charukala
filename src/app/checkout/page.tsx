@@ -5,6 +5,7 @@ import { useCartStore } from "@/store/cart-store";
 
 declare global {
   interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     Razorpay: any;
   }
 }
@@ -118,7 +119,7 @@ export default function CheckoutPage() {
         },
 
         handler: async function (
-  response: any
+  response: { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string }
 ) {
 
 try {

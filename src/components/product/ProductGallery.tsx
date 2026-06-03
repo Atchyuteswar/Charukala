@@ -11,7 +11,7 @@ images:string[]
 
 const [selected,setSelected]=
 useState(
-images?.[0]
+images?.[0] || "https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=1200&auto=format&fit=crop"
 );
 
 return(
@@ -34,7 +34,7 @@ bg-[#f8f5f0]
 >
 
 <Image
-src={selected}
+src={selected || "https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=1200&auto=format&fit=crop"}
 alt="Product"
 fill
 sizes="
@@ -102,7 +102,7 @@ selected===image
 >
 
 <Image
-src={image}
+src={image || "https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=1200&auto=format&fit=crop"}
 alt="Thumbnail"
 fill
 sizes="

@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 
 export async function PATCH(
   req: Request,
-  context: any
+  context: { params: Promise<{ id: string }> }
 ) {
 
   try {
@@ -12,8 +12,9 @@ export async function PATCH(
     const body =
       await req.json();
 
+    const resolvedParams = await context.params;
     const id =
-      context.params.id;
+      resolvedParams.id;
 
     // UPDATE ORDER
 

@@ -55,12 +55,8 @@ export default function AIStylist() {
 
   function startListening() {
 
-    const SpeechRecognition =
-      (window as any)
-      .SpeechRecognition
-      ||
-      (window as any)
-      .webkitSpeechRecognition;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
 
@@ -83,7 +79,7 @@ export default function AIStylist() {
     setListening(true);
 
     recognition.onresult =
-      (event: any) => {
+      (event: { results: { transcript: string }[][] }) => {
 
         const transcript =
           event.results[0][0]

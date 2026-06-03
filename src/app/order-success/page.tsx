@@ -1,3 +1,4 @@
+import Link from "next/link";
 type SearchParams = Promise<{
 id?:string
 }>;
@@ -71,7 +72,7 @@ Order ID:
 
 </p>
 
-<a
+<Link
 href="/products"
 className="
 bg-[#8a1538]
@@ -84,7 +85,7 @@ rounded-full
 
 Continue Shopping
 
-</a>
+</Link>
 
 </div>
 

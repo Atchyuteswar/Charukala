@@ -172,7 +172,7 @@ export default async function PersonalizedSection() {
                 >
 
                   <Image
-                    src={product.images[0]}
+                    src={product.images?.[0] || "https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=1200&auto=format&fit=crop"}
                     alt={product.name}
                     fill
                     sizes="

@@ -197,7 +197,7 @@ export default async function WishlistPage() {
 
                         <Image
                           src={
-                            item.product.images?.[0]
+                            item.product.images?.[0] || "https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=1200&auto=format&fit=crop"
                           }
                           alt={
                             item.product.name

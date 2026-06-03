@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
 
@@ -25,7 +26,13 @@ export default function Footer() {
           <div className="sm:col-span-2 md:col-span-1">
 
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black">
-              Charukala
+              <Image 
+                src="/logo-main.png" 
+                alt="Charukala" 
+                width={160} 
+                height={40} 
+                className="w-auto h-8 sm:h-10 md:h-12 object-contain" 
+              />
             </h2>
 
             <p
