@@ -3,13 +3,15 @@ import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 
+import Link from "next/link";
+
 import OrderTimeline from "@/components/orders/OrderTimeline";
 
 export default async function OrdersPage() {
   const session = await auth();
 
   if (!session?.user?.email) {
-    redirect("/api/auth/signin");
+    redirect("/login");
   }
 
   const user = await prisma.user.findUnique({
@@ -149,6 +151,22 @@ export default async function OrdersPage() {
                       <p className="text-lg text-[#2A2A2A] font-medium">{order.phone}</p>
                     </div>
                   </div>
+                </div>
+
+                {/* INVOICE LINK */}
+                <div className="border-t border-[#E8DCC4] px-8 py-5 flex items-center justify-end gap-4 bg-white">
+                  <Link
+                    href={`/api/invoice/${order.id}`}
+                    className="text-sm font-medium text-[#6B6B6B] hover:text-[#2A2A2A] transition-colors"
+                  >
+                    Download PDF
+                  </Link>
+                  <Link
+                    href={`/invoice/${order.id}`}
+                    className="btn-primary text-sm !py-2.5 !px-5"
+                  >
+                    View Invoice
+                  </Link>
                 </div>
               </div>
             ))}

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
+import { sendInvoiceEmail } from "@/lib/email";
 
 export async function POST(req: Request) {
   try {
@@ -140,7 +141,11 @@ export async function POST(req: Request) {
         },
 
         include: {
-          items: true
+          items: {
+            include: {
+              product: true,
+            },
+          },
         }
 
       });
@@ -164,6 +169,22 @@ export async function POST(req: Request) {
       });
 
     }
+
+    // Send invoice email (fire-and-forget)
+
+    sendInvoiceEmail({
+      to: session.user.email,
+      order: {
+        ...order,
+        items: order.items.map((item) => ({
+          product: { name: item.product.name },
+          quantity: item.quantity,
+          price: item.price,
+        })),
+      },
+    }).catch((err) =>
+      console.log("Invoice email failed:", err)
+    );
 
     return NextResponse.json({
       success: true,

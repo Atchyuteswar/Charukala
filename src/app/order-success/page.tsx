@@ -141,12 +141,12 @@ export default async function OrderSuccess({
           "
         >
           <Link
-            href={`/api/invoice/${params.id}`}
+            href={`/invoice/${params.id}`}
             className="
               btn-primary
             "
           >
-            Download Invoice
+            View Invoice
           </Link>
 
           <Link

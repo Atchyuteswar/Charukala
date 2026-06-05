@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Script from "next/script";
 import { useCartStore } from "@/store/cart-store";
 
 declare global {
@@ -85,6 +86,12 @@ export default function CheckoutPage() {
       if (!paymentRes.ok) {
         throw new Error(
           paymentData.error
+        );
+      }
+
+      if (!window.Razorpay) {
+        throw new Error(
+          "Razorpay SDK not loaded. Please refresh and try again."
         );
       }
 
@@ -206,6 +213,11 @@ export default function CheckoutPage() {
   }
 
   return (
+    <>
+    <Script
+      src="https://checkout.razorpay.com/v1/checkout.js"
+      strategy="lazyOnload"
+    />
     <main
       className="
         min-h-screen
@@ -519,5 +531,6 @@ export default function CheckoutPage() {
         </div>
       </div>
     </main>
+    </>
   );
 }
