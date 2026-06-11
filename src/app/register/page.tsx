@@ -46,17 +46,6 @@ export default function RegisterPage() {
   return (
     <main className="min-h-screen bg-[#FDFBF7] flex flex-col items-center justify-center p-6">
       <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-sm border border-[#E8DCC4]">
-        <div className="flex justify-center mb-8">
-          <Link href="/">
-            <Image
-              src="/logo-main.png"
-              alt="Charukala"
-              width={200}
-              height={50}
-              className="h-12 w-auto object-contain"
-            />
-          </Link>
-        </div>
 
         <h1 className="text-2xl font-brand text-[#2A2A2A] mb-6 text-center">
           Create an Account
