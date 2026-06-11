@@ -3,148 +3,294 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { Search } from "lucide-react";
 
+const categories = {
+  Sarees: [
+    "Silk Sarees",
+    "Kalamkari Sarees",
+    "Gadwal Sarees",
+    "Maheshwari Sarees",
+    "Tussar Sarees",
+    "Banarasi Sarees",
+    "Cotton Sarees",
+    "Jamdani Sarees",
+    "Handloom Sarees",
+    "Fancy Sarees",
+  ],
+
+  Dresses: [
+    "Ready-Made Dresses",
+    "Unstitched Materials",
+  ],
+};
+
 export default function ProductFilters() {
   const router = useRouter();
   const params = useSearchParams();
 
-  function updateParam(key: string, value: string) {
-    const searchParams = new URLSearchParams(params.toString());
+  const selectedCategory =
+    params.get("category") || "";
+
+  function updateParam(
+    key: string,
+    value: string
+  ) {
+    const searchParams =
+      new URLSearchParams(
+        params.toString()
+      );
+
     if (value) {
-      searchParams.set(key, value);
+      searchParams.set(
+        key,
+        value
+      );
     } else {
       searchParams.delete(key);
     }
-    router.push(`/products?${searchParams.toString()}`);
+
+    if (key === "category") {
+      searchParams.delete(
+        "subCategory"
+      );
+    }
+
+    router.push(
+      `/products?${searchParams.toString()}`
+    );
+  }
+
+  function clearFilters() {
+    router.push("/products");
   }
 
   return (
     <div
       className="
-        flex
-        flex-col
-        lg:flex-row
-        gap-6
-        items-center
-        justify-between
-        pb-8
-        border-b
-        border-[#E8DCC4]
+      bg-white
+      border
+      border-[#E8DCC4]
+      rounded-[28px]
+      p-6
+      md:p-8
+      shadow-sm
       "
     >
-      {/* SEARCH */}
+      {/* SEARCH + FILTERS */}
+
       <div
         className="
-          relative
-          w-full
-          lg:max-w-md
+        grid
+        grid-cols-1
+        lg:grid-cols-4
+        gap-4
         "
       >
-        <Search
-          size={18}
+        {/* SEARCH */}
+
+        <div
           className="
+          relative
+          lg:col-span-1
+          "
+        >
+          <Search
+            size={18}
+            className="
             absolute
             left-4
             top-1/2
             -translate-y-1/2
             text-[#6B6B6B]
-          "
-        />
-        <input
-          type="text"
-          placeholder="Search collections..."
-          defaultValue={params.get("search") || ""}
-          onChange={(e) => updateParam("search", e.target.value)}
-          className="
-            w-full
-            pl-12
-            pr-4
-            py-3
-            bg-transparent
-            border
-            border-[#E8DCC4]
-            rounded-xl
-            outline-none
-            transition
-            focus:border-[#7A0019]
-            placeholder:text-[#6B6B6B]
-          "
-        />
-      </div>
+            "
+          />
 
-      {/* DROPDOWNS */}
-      <div
-        className="
-          flex
-          w-full
-          lg:w-auto
-          gap-4
-        "
-      >
-        {/* CATEGORY */}
-        <select
-          defaultValue={params.get("category") || ""}
-          onChange={(e) => updateParam("category", e.target.value)}
-          className="
-            flex-1
-            lg:w-48
-            bg-transparent
+          <input
+            type="text"
+            placeholder="Search products..."
+            defaultValue={
+              params.get("search") || ""
+            }
+            onChange={(e) =>
+              updateParam(
+                "search",
+                e.target.value
+              )
+            }
+            className="
+            w-full
+            h-12
+            pl-11
+            pr-4
+            rounded-xl
             border
             border-[#E8DCC4]
-            rounded-xl
-            px-4
-            py-3
+            bg-white
             outline-none
             transition
             focus:border-[#7A0019]
-            text-[#2A2A2A]
-            cursor-pointer
-            appearance-none
+            "
+          />
+        </div>
+
+        {/* CATEGORY */}
+
+        <select
+          value={selectedCategory}
+          onChange={(e) =>
+            updateParam(
+              "category",
+              e.target.value
+            )
+          }
+          className="
+          h-12
+          px-4
+          rounded-xl
+          border
+          border-[#E8DCC4]
+          bg-white
+          outline-none
+          cursor-pointer
+          focus:border-[#7A0019]
           "
-          style={{
-            backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "right 1rem center",
-            backgroundSize: "1em",
-          }}
         >
-          <option value="">All Collections</option>
-          <option value="Bridal">Bridal Heritage</option>
-          <option value="Festival">Festive Wear</option>
-          <option value="Silk">Pure Silk</option>
-          <option value="Party">Evening Classics</option>
+          <option value="">
+            All Categories
+          </option>
+
+          <option value="Sarees">
+            Sarees
+          </option>
+
+          <option value="Dresses">
+            Dresses
+          </option>
+        </select>
+
+        {/* SUB CATEGORY */}
+
+        <select
+          value={
+            params.get(
+              "subCategory"
+            ) || ""
+          }
+          onChange={(e) =>
+            updateParam(
+              "subCategory",
+              e.target.value
+            )
+          }
+          disabled={!selectedCategory}
+          className="
+          h-12
+          px-4
+          rounded-xl
+          border
+          border-[#E8DCC4]
+          bg-white
+          outline-none
+          cursor-pointer
+          disabled:opacity-50
+          disabled:cursor-not-allowed
+          focus:border-[#7A0019]
+          "
+        >
+          <option value="">
+            All Sub Categories
+          </option>
+
+          {selectedCategory &&
+            categories[
+              selectedCategory as keyof typeof categories
+            ]?.map(
+              (subCategory) => (
+                <option
+                  key={
+                    subCategory
+                  }
+                  value={
+                    subCategory
+                  }
+                >
+                  {subCategory}
+                </option>
+              )
+            )}
         </select>
 
         {/* SORT */}
+
         <select
-          defaultValue={params.get("sort") || ""}
-          onChange={(e) => updateParam("sort", e.target.value)}
+          value={
+            params.get("sort") || ""
+          }
+          onChange={(e) =>
+            updateParam(
+              "sort",
+              e.target.value
+            )
+          }
           className="
-            flex-1
-            lg:w-48
-            bg-transparent
-            border
-            border-[#E8DCC4]
-            rounded-xl
-            px-4
-            py-3
-            outline-none
-            transition
-            focus:border-[#7A0019]
-            text-[#2A2A2A]
-            cursor-pointer
-            appearance-none
+          h-12
+          px-4
+          rounded-xl
+          border
+          border-[#E8DCC4]
+          bg-white
+          outline-none
+          cursor-pointer
+          focus:border-[#7A0019]
           "
-          style={{
-            backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "right 1rem center",
-            backgroundSize: "1em",
-          }}
         >
-          <option value="">Latest Arrivals</option>
-          <option value="low">Price: Low to High</option>
-          <option value="high">Price: High to Low</option>
+          <option value="">
+            Latest Arrivals
+          </option>
+
+          <option value="low">
+            Price: Low to High
+          </option>
+
+          <option value="high">
+            Price: High to Low
+          </option>
         </select>
+      </div>
+
+      {/* ACTIONS */}
+
+      <div
+        className="
+        flex
+        flex-wrap
+        justify-between
+        items-center
+        gap-4
+        mt-6
+        pt-5
+        border-t
+        border-[#E8DCC4]
+        "
+      >
+        
+
+        <button
+          onClick={clearFilters}
+          className="
+          px-5
+          py-2.5
+          rounded-xl
+          border
+          border-[#7A0019]
+          text-[#7A0019]
+          font-medium
+          transition
+          hover:bg-[#7A0019]
+          hover:text-white
+          "
+        >
+          Clear Filters
+        </button>
       </div>
     </div>
   );

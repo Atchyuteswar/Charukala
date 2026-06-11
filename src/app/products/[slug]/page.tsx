@@ -32,22 +32,22 @@ export default async function ProductPage({
   return (
     <main
       className="
-        min-h-screen
-        bg-[#F8F3EA]
-        pt-28
-        md:pt-32
-        pb-24
+      min-h-screen
+      bg-[#F8F3EA]
+      pt-28
+      md:pt-32
+      pb-24
       "
     >
       <div
         className="
-          max-w-7xl
-          mx-auto
-          px-6
-          grid
-          lg:grid-cols-2
-          gap-12
-          lg:gap-20
+        max-w-7xl
+        mx-auto
+        px-6
+        grid
+        lg:grid-cols-2
+        gap-12
+        lg:gap-20
         "
       >
         {/* GALLERY */}
@@ -60,31 +60,46 @@ export default async function ProductPage({
 
         <div
           className="
-            lg:sticky
-            lg:top-28
-            h-fit
+          lg:sticky
+          lg:top-28
+          h-fit
           "
         >
-          {/* LABEL */}
+          {/* CATEGORY */}
 
-          <p
-            className="
-              section-tag
-              mb-6
-            "
-          >
-            Charukala Collection
-          </p>
+          <div className="mb-6">
+            <p
+              className="
+              text-xs
+              uppercase
+              tracking-[0.25em]
+              text-[#D4A857]
+              font-semibold
+              "
+            >
+              {product.category}
+            </p>
+
+            <p
+              className="
+              mt-2
+              text-[#6B6B6B]
+              text-sm
+              "
+            >
+              {product.subCategory}
+            </p>
+          </div>
 
           {/* TITLE */}
 
           <h1
             className="
-              font-brand
-              text-[#2A2A2A]
-              text-5xl
-              md:text-6xl
-              leading-tight
+            font-brand
+            text-[#2A2A2A]
+            text-5xl
+            md:text-6xl
+            leading-tight
             "
           >
             {product.name}
@@ -94,10 +109,10 @@ export default async function ProductPage({
 
           <p
             className="
-              mt-6
-              text-3xl
-              font-semibold
-              text-[#7A0019]
+            mt-6
+            text-3xl
+            font-semibold
+            text-[#7A0019]
             "
           >
             ₹{product.price}
@@ -107,33 +122,33 @@ export default async function ProductPage({
 
           <div
             className="
-              flex
-              items-center
-              gap-3
-              mt-8
+            flex
+            items-center
+            gap-3
+            mt-8
             "
           >
             <div
               className={`
-                w-3
-                h-3
-                rounded-full
-                ${
-                  product.stock > 0
-                    ? "bg-green-500"
-                    : "bg-red-500"
-                }
+              w-3
+              h-3
+              rounded-full
+              ${
+                product.stock > 0
+                  ? "bg-green-500"
+                  : "bg-red-500"
+              }
               `}
             />
 
             <p
               className="
-                text-[#6B6B6B]
+              text-[#6B6B6B]
               "
             >
               {product.stock > 0
-                ? "Available for Order"
-                : "Currently Unavailable"}
+                ? `${product.stock} Available`
+                : "Out Of Stock"}
             </p>
           </div>
 
@@ -142,9 +157,9 @@ export default async function ProductPage({
           <div className="mt-10">
             <h2
               className="
-                font-brand
-                text-3xl
-                mb-4
+              font-brand
+              text-3xl
+              mb-4
               "
             >
               Product Details
@@ -152,8 +167,8 @@ export default async function ProductPage({
 
             <p
               className="
-                text-[#6B6B6B]
-                leading-8
+              text-[#6B6B6B]
+              leading-8
               "
             >
               {product.description}
@@ -172,20 +187,20 @@ export default async function ProductPage({
 
           <div
             className="
-              mt-16
-              pt-10
-              border-t
-              border-[#E8DCC4]
-              grid
-              gap-8
+            mt-16
+            pt-10
+            border-t
+            border-[#E8DCC4]
+            grid
+            gap-8
             "
           >
             <div>
               <h3
                 className="
-                  font-brand
-                  text-2xl
-                  text-[#2A2A2A]
+                font-brand
+                text-2xl
+                text-[#2A2A2A]
                 "
               >
                 Handcrafted Excellence
@@ -193,24 +208,24 @@ export default async function ProductPage({
 
               <p
                 className="
-                  mt-2
-                  text-[#6B6B6B]
-                  leading-7
+                mt-2
+                text-[#6B6B6B]
+                leading-7
                 "
               >
-                Carefully curated sarees
-                celebrating India&apos;s rich
-                weaving traditions and
-                timeless artistry.
+                Carefully curated products
+                celebrating India's rich
+                textile heritage and
+                craftsmanship.
               </p>
             </div>
 
             <div>
               <h3
                 className="
-                  font-brand
-                  text-2xl
-                  text-[#2A2A2A]
+                font-brand
+                text-2xl
+                text-[#2A2A2A]
                 "
               >
                 Pan India Delivery
@@ -218,33 +233,33 @@ export default async function ProductPage({
 
               <p
                 className="
-                  mt-2
-                  text-[#6B6B6B]
-                  leading-7
+                mt-2
+                text-[#6B6B6B]
+                leading-7
                 "
               >
-                Secure and reliable
-                shipping across India
-                with careful packaging.
+                Secure shipping across
+                India with premium
+                packaging and tracking.
               </p>
             </div>
 
             <div>
               <h3
                 className="
-                  font-brand
-                  text-2xl
-                  text-[#2A2A2A]
+                font-brand
+                text-2xl
+                text-[#2A2A2A]
                 "
               >
-                Secure Checkout
+                Secure Payments
               </h3>
 
               <p
                 className="
-                  mt-2
-                  text-[#6B6B6B]
-                  leading-7
+                mt-2
+                text-[#6B6B6B]
+                leading-7
                 "
               >
                 Protected online payments

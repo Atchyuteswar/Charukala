@@ -5,6 +5,10 @@ export async function getFeaturedProducts() {
     where: {
       featured: true,
     },
+
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 }
 
@@ -16,7 +20,61 @@ export async function getAllProducts() {
   });
 }
 
-export async function getProductBySlug(slug: string) {
+export async function getProductsByCategory(
+  category: string
+) {
+  return await prisma.product.findMany({
+    where: {
+      category,
+    },
+
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+}
+
+export async function getProductsBySubCategory(
+  subCategory: string
+) {
+  return await prisma.product.findMany({
+    where: {
+      subCategory,
+    },
+
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+}
+
+export async function getFilteredProducts({
+  category,
+  subCategory,
+}: {
+  category?: string;
+  subCategory?: string;
+}) {
+  return await prisma.product.findMany({
+    where: {
+      ...(category && {
+        category,
+      }),
+
+      ...(subCategory && {
+        subCategory,
+      }),
+    },
+
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+}
+
+export async function getProductBySlug(
+  slug: string
+) {
   return await prisma.product.findUnique({
     where: {
       slug,

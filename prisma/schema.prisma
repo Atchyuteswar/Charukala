@@ -53,6 +53,7 @@ model Product {
 
   name         String
   slug         String @unique
+
   description  String
 
   price        Float
@@ -60,7 +61,11 @@ model Product {
 
   featured     Boolean @default(false)
 
+  // Main Category
   category     String
+
+  // Sub Category
+  subCategory  String
 
   images       String[]
 

@@ -1,101 +1,101 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-function generateSlug(name:string){
+function generateSlug(
+  name: string
+) {
+  const baseSlug =
+    name
+      .toLowerCase()
+      .trim()
+      .replace(
+        /[^\w\s-]/g,
+        ""
+      )
+      .replace(
+        /\s+/g,
+        "-"
+      );
 
-const baseSlug =
-name
-.toLowerCase()
-.trim()
-.replace(/[^\w\s-]/g,"")
-.replace(/\s+/g,"-");
-
-return `${baseSlug}-${Date.now()}`;
+  return `${baseSlug}-${Date.now()}`;
 }
 
 export async function POST(
-req:Request
-){
+  req: Request
+) {
+  try {
+    const body =
+      await req.json();
 
-try{
+    if (
+      !body.name ||
+      !body.description ||
+      !body.price ||
+      !body.stock ||
+      !body.category ||
+      !body.subCategory
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "All fields required",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
 
-const body=
-await req.json();
+    const product =
+      await prisma.product.create({
+        data: {
+          name:
+            body.name,
 
-if(
-!body.name ||
-!body.description ||
-!body.price ||
-!body.stock ||
-!body.category
-){
+          slug:
+            generateSlug(
+              body.name
+            ),
 
-return NextResponse.json(
-{
-error:"All fields required"
-},
-{
-status:400
-}
-);
+          description:
+            body.description,
 
-}
+          price: Number(
+            body.price
+          ),
 
-const product=
-await prisma.product.create({
+          stock: Number(
+            body.stock
+          ),
 
-data:{
+          category:
+            body.category,
 
-name:body.name,
+          subCategory:
+            body.subCategory,
 
-slug:
-generateSlug(
-body.name
-),
+          featured:
+            false,
 
-description:
-body.description,
+          images:
+            body.images || [],
+        },
+      });
 
-price:
-Number(
-body.price
-),
+    return NextResponse.json(
+      product
+    );
+  } catch (error) {
+    console.log(error);
 
-stock:
-Number(
-body.stock
-),
-
-category:
-body.category,
-
-featured:false,
-
-images:
-body.images || []
-
-}
-
-});
-
-return NextResponse.json(
-product
-);
-
-}
-
-catch(error){
-
-console.log(error);
-
-return NextResponse.json(
-{
-error:"Product creation failed"
-},
-{
-status:500
-}
-)
-
-}
+    return NextResponse.json(
+      {
+        error:
+          "Product creation failed",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
 }

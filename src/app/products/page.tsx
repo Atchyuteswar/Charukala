@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/prisma";
 import ProductFilters from "@/components/product/ProductFilters";
+
+export const dynamic = "force-dynamic";
 
 export default async function ProductsPage({
   searchParams,
@@ -11,96 +12,99 @@ export default async function ProductsPage({
   searchParams: Promise<{
     search?: string;
     category?: string;
+    subCategory?: string;
     sort?: string;
   }>;
 }) {
-  const resolvedParams =
-    await searchParams;
+  const params = await searchParams;
 
-  const search =
-    resolvedParams.search || "";
+  const search = params.search || "";
+  const category = params.category || "";
+  const subCategory = params.subCategory || "";
+  const sort = params.sort || "";
 
-  const category =
-    resolvedParams.category || "";
-
-  const sort =
-    resolvedParams.sort || "";
-
-  const products =
-    await prisma.product.findMany({
-      where: {
-        AND: [
-          search
-            ? {
-                OR: [
-                  {
-                    name: {
-                      contains: search,
-                      mode: "insensitive",
-                    },
+  const products = await prisma.product.findMany({
+    where: {
+      AND: [
+        search
+          ? {
+              OR: [
+                {
+                  name: {
+                    contains: search,
+                    mode: "insensitive",
                   },
-                  {
-                    description: {
-                      contains: search,
-                      mode: "insensitive",
-                    },
-                  },
-                ],
-              }
-            : {},
-          category
-            ? {
-                category: {
-                  contains: category,
-                  mode: "insensitive",
                 },
-              }
-            : {},
-        ],
-      },
+                {
+                  description: {
+                    contains: search,
+                    mode: "insensitive",
+                  },
+                },
+              ],
+            }
+          : {},
 
-      orderBy:
-        sort === "low"
+        category
           ? {
-              price: "asc",
+              category: {
+                equals: category,
+              },
             }
-          : sort === "high"
+          : {},
+
+        subCategory
           ? {
-              price: "desc",
+              subCategory: {
+                equals: subCategory,
+              },
             }
-          : {
-              createdAt: "desc",
-            },
-    });
+          : {},
+      ],
+    },
+
+    orderBy:
+      sort === "low"
+        ? {
+            price: "asc",
+          }
+        : sort === "high"
+        ? {
+            price: "desc",
+          }
+        : {
+            createdAt: "desc",
+          },
+  });
 
   return (
     <main
       className="
-        min-h-screen
-        bg-[#F8F3EA]
-        pt-32
-        pb-24
+      min-h-screen
+      bg-[#F8F3EA]
+      pt-32
+      pb-24
       "
     >
       <div
         className="
-          max-w-7xl
-          mx-auto
-          px-6
+        max-w-7xl
+        mx-auto
+        px-6
         "
       >
         {/* HEADER */}
 
         <div
           className="
-            text-center
-            mb-16
+          text-center
+          mb-16
           "
         >
           <p
             className="
-              section-tag
-              mb-4
+            section-tag
+            mb-4
             "
           >
             The Charukala Collection
@@ -108,50 +112,80 @@ export default async function ProductsPage({
 
           <h1
             className="
-              font-brand
-              text-[#2A2A2A]
-              text-5xl
-              md:text-7xl
+            font-brand
+            text-[#2A2A2A]
+            text-5xl
+            md:text-7xl
             "
           >
-            Timeless Sarees
+            Sarees & Dresses
           </h1>
 
           <p
             className="
-              section-description
-              mx-auto
-              mt-6
+            section-description
+            mx-auto
+            mt-6
             "
           >
-            Discover handcrafted sarees inspired
-            by India&apos;s rich weaving heritage,
-            designed for celebrations and
-            timeless elegance.
+            Explore handcrafted sarees and curated dress materials inspired by
+            India's rich textile heritage.
           </p>
         </div>
 
         {/* FILTERS */}
 
-        <div className="mb-12">
+        <div className="mb-10">
           <ProductFilters />
         </div>
 
-        {/* EMPTY */}
+        {/* PRODUCT COUNT */}
+
+        <div
+          className="
+          flex
+          justify-between
+          items-center
+          mb-10
+          pb-5
+          border-b
+          border-[#E8DCC4]
+          "
+        >
+          <p
+            className="
+            text-[#6B6B6B]
+            "
+          >
+            {products.length} Products Found
+          </p>
+
+          <p
+            className="
+            text-sm
+            text-[#6B6B6B]
+            hidden md:block
+            "
+          >
+            Showing latest collections
+          </p>
+        </div>
+
+        {/* EMPTY STATE */}
 
         {products.length === 0 ? (
           <div
             className="
-              bg-white
-              rounded-2xl
-              p-16
-              text-center
+            bg-white
+            rounded-3xl
+            p-16
+            text-center
             "
           >
             <h2
               className="
-                font-brand
-                text-4xl
+              font-brand
+              text-4xl
               "
             >
               No Products Found
@@ -159,8 +193,8 @@ export default async function ProductsPage({
 
             <p
               className="
-                mt-4
-                text-[#6B6B6B]
+              mt-4
+              text-[#6B6B6B]
               "
             >
               Try adjusting your filters.
@@ -169,11 +203,12 @@ export default async function ProductsPage({
         ) : (
           <div
             className="
-              grid
-              grid-cols-2
-              lg:grid-cols-4
-              gap-6
-              md:gap-8
+            grid
+            grid-cols-1
+            sm:grid-cols-2
+            lg:grid-cols-3
+            xl:grid-cols-4
+            gap-8
             "
           >
             {products.map((product) => (
@@ -181,77 +216,75 @@ export default async function ProductsPage({
                 key={product.id}
                 href={`/products/${product.slug}`}
                 className="
-                  block
-                  group
+                block
+                group
                 "
               >
                 {/* IMAGE */}
 
                 <div
                   className="
-                    relative
-                    overflow-hidden
-                    rounded-2xl
-                    bg-white
+                  overflow-hidden
+                  rounded-[32px]
+                  bg-white
+                  shadow-sm
                   "
                 >
                   <div
                     className="
-                      relative
-                      h-[260px]
-                      md:h-[420px]
+                    relative
+                    h-[420px]
                     "
                   >
                     <Image
                       src={
-                        product.images?.[0] &&
-                        product.images[0].trim() !== ""
+                        product.images?.[0]?.trim()
                           ? product.images[0]
                           : "/placeholder-saree.jpg"
                       }
                       alt={product.name}
                       fill
-                      sizes="
-                        (max-width:768px) 50vw,
-                        (max-width:1200px) 33vw,
-                        25vw
-                      "
+                      sizes="(max-width:768px) 100vw, 25vw"
                       className="
-                        object-cover
-                        transition
-                        duration-700
-                        group-hover:scale-105
+                      object-cover
+                      transition
+                      duration-700
+                      group-hover:scale-105
                       "
                     />
                   </div>
                 </div>
 
-                {/* DETAILS */}
+                {/* INFO */}
 
-                <div
-                  className="
-                    mt-5
-                    text-center
-                  "
-                >
+                <div className="mt-5">
                   <p
                     className="
-                      text-xs
-                      uppercase
-                      tracking-[0.2em]
-                      text-[#D4A857]
+                    text-xs
+                    uppercase
+                    tracking-[0.25em]
+                    text-[#D4A857]
                     "
                   >
                     {product.category}
                   </p>
 
+                  <p
+                    className="
+                    text-sm
+                    mt-2
+                    text-[#6B6B6B]
+                    "
+                  >
+                    {product.subCategory}
+                  </p>
+
                   <h2
                     className="
-                      font-brand
-                      text-xl
-                      md:text-2xl
-                      mt-2
-                      text-[#2A2A2A]
+                    font-brand
+                    text-2xl
+                    mt-2
+                    text-[#2A2A2A]
                     "
                   >
                     {product.name}
@@ -259,13 +292,13 @@ export default async function ProductsPage({
 
                   <p
                     className="
-                      mt-3
-                      text-lg
-                      font-semibold
-                      text-[#7A0019]
+                    mt-3
+                    text-xl
+                    font-semibold
+                    text-[#7A0019]
                     "
                   >
-                    ₹{product.price}
+                    ₹{product.price.toLocaleString("en-IN")}
                   </p>
                 </div>
               </Link>

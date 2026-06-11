@@ -13,11 +13,12 @@ export async function GET(
   try {
     const { id } = await params;
 
-    const product = await prisma.product.findUnique({
-      where: {
-        id,
-      },
-    });
+    const product =
+      await prisma.product.findUnique({
+        where: {
+          id,
+        },
+      });
 
     if (!product) {
       return NextResponse.json(
@@ -31,7 +32,6 @@ export async function GET(
     }
 
     return NextResponse.json(product);
-
   } catch (error) {
     console.log(error);
 
@@ -46,27 +46,41 @@ export async function GET(
   }
 }
 
-
 // UPDATE PRODUCT
 export async function PUT(
   req: Request,
   { params }: { params: Params }
 ) {
   try {
-
     const { id } = await params;
 
     const body = await req.json();
 
+    if (
+      !body.name ||
+      !body.description ||
+      !body.price ||
+      !body.stock ||
+      !body.category ||
+      !body.subCategory
+    ) {
+      return NextResponse.json(
+        {
+          error: "All fields required",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
     const updatedProduct =
       await prisma.product.update({
-
         where: {
           id,
         },
 
         data: {
-
           name: body.name,
 
           description:
@@ -81,31 +95,33 @@ export async function PUT(
           category:
             body.category,
 
-        }
+          subCategory:
+            body.subCategory,
 
+          images:
+            Array.isArray(body.images)
+              ? body.images
+              : [],
+        },
       });
 
     return NextResponse.json(
       updatedProduct
     );
-
   } catch (error) {
-
     console.log(error);
 
     return NextResponse.json(
       {
         error:
-          "Update failed"
+          "Update failed",
       },
       {
-        status: 500
+        status: 500,
       }
     );
-
   }
 }
-
 
 // DELETE PRODUCT
 export async function DELETE(
@@ -113,55 +129,47 @@ export async function DELETE(
   { params }: { params: Params }
 ) {
   try {
-
     const { id } = await params;
 
     const product =
       await prisma.product.findUnique({
         where: {
-          id
-        }
+          id,
+        },
       });
 
     if (!product) {
-
       return NextResponse.json(
         {
           error:
-            "Product not found"
+            "Product not found",
         },
         {
-          status: 404
+          status: 404,
         }
       );
-
     }
 
     await prisma.product.delete({
-
       where: {
-        id
-      }
-
+        id,
+      },
     });
 
     return NextResponse.json({
-      success: true
+      success: true,
     });
-
   } catch (error) {
-
     console.log(error);
 
     return NextResponse.json(
       {
         error:
-          "Delete failed"
+          "Delete failed",
       },
       {
-        status: 500
+        status: 500,
       }
     );
-
   }
 }
