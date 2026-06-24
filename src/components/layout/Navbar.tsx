@@ -26,9 +26,9 @@ export default function Navbar() {
           left-0
           right-0
           z-50
-          bg-[#F8F3EA]
+          bg-[#7A0019]
           border-b
-          border-[#E8DCC4]
+          border-[#5A0012]
         "
       >
         <div
@@ -83,7 +83,7 @@ export default function Navbar() {
             }
             className="
               lg:hidden
-              text-[#2A2A2A]
+              text-[#D4A857]
             "
           >
             <Menu
@@ -150,8 +150,8 @@ export default function Navbar() {
             <Link
               href="/products"
               className="
-                text-[#2A2A2A]
-                hover:text-[#7A0019]
+                text-[#D4A857]
+                hover:text-[#F8F3EA]
                 transition
               "
             >
@@ -161,8 +161,8 @@ export default function Navbar() {
             <Link
               href="/profile"
               className="
-                text-[#2A2A2A]
-                hover:text-[#7A0019]
+                text-[#D4A857]
+                hover:text-[#F8F3EA]
                 transition
               "
             >
@@ -173,8 +173,8 @@ export default function Navbar() {
               href="/cart"
               className="
                 relative
-                text-[#2A2A2A]
-                hover:text-[#7A0019]
+                text-[#D4A857]
+                hover:text-[#F8F3EA]
                 transition
               "
             >
@@ -224,7 +224,7 @@ export default function Navbar() {
                 h-full
                 w-[85%]
                 max-w-[360px]
-                bg-[#F8F3EA]
+                bg-[#7A0019]
                 z-[100]
                 p-8
               "
@@ -253,6 +253,7 @@ export default function Navbar() {
                   onClick={() =>
                     setMobileMenuOpen(false)
                   }
+                  className="text-[#D4A857]"
                 >
                   <X
                     size={26}
@@ -276,6 +277,8 @@ export default function Navbar() {
                   className="
                     text-2xl
                     font-brand
+                    font-bold
+                    text-[#D4A857] hover:text-[#F8F3EA]
                   "
                 >
                   Home
@@ -289,6 +292,8 @@ export default function Navbar() {
                   className="
                     text-2xl
                     font-brand
+                    font-bold
+                    text-[#D4A857] hover:text-[#F8F3EA]
                   "
                 >
                   Collections
@@ -302,6 +307,8 @@ export default function Navbar() {
                   className="
                     text-2xl
                     font-brand
+                    font-bold
+                    text-[#D4A857] hover:text-[#F8F3EA]
                   "
                 >
                   Orders
@@ -315,6 +322,8 @@ export default function Navbar() {
                   className="
                     text-2xl
                     font-brand
+                    font-bold
+                    text-[#D4A857] hover:text-[#F8F3EA]
                   "
                 >
                   Profile
@@ -328,6 +337,8 @@ export default function Navbar() {
                   className="
                     text-2xl
                     font-brand
+                    font-bold
+                    text-[#D4A857] hover:text-[#F8F3EA]
                   "
                 >
                   Cart

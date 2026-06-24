@@ -167,9 +167,9 @@ body {
 
   font-size: 0.95rem;
 
-  font-weight: 500;
+  font-weight: bold;
 
-  color: var(--charukala-charcoal);
+  color: var(--charukala-gold);
 
   transition: color 0.2s ease;
 
@@ -177,7 +177,7 @@ body {
 
 .nav-link:hover {
 
-  color: var(--charukala-maroon);
+  color: var(--charukala-ivory);
 
 }
 

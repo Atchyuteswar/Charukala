@@ -5,9 +5,9 @@ export default function Footer() {
   return (
     <footer
       className="
-        bg-[#F8F3EA]
+        bg-[#7A0019]
         border-t
-        border-[#E8DCC4]
+        border-[#5A0012]
         pt-20
         pb-10
       "
@@ -44,7 +44,7 @@ export default function Footer() {
             <p
               className="
                 mt-6
-                text-[#6B6B6B]
+                text-[#F8F3EA]/80
                 leading-8
                 max-w-sm
               "
@@ -62,7 +62,7 @@ export default function Footer() {
               className="
                 font-brand
                 text-3xl
-                text-[#2A2A2A]
+                text-[#D4A857]
                 mb-6
               "
             >
@@ -79,8 +79,8 @@ export default function Footer() {
               <Link
                 href="/"
                 className="
-                  text-[#6B6B6B]
-                  hover:text-[#7A0019]
+                  text-[#F8F3EA]/80
+                  hover:text-[#D4A857]
                   transition
                 "
               >
@@ -90,8 +90,8 @@ export default function Footer() {
               <Link
                 href="/products"
                 className="
-                  text-[#6B6B6B]
-                  hover:text-[#7A0019]
+                  text-[#F8F3EA]/80
+                  hover:text-[#D4A857]
                   transition
                 "
               >
@@ -101,8 +101,8 @@ export default function Footer() {
               <Link
                 href="/orders"
                 className="
-                  text-[#6B6B6B]
-                  hover:text-[#7A0019]
+                  text-[#F8F3EA]/80
+                  hover:text-[#D4A857]
                   transition
                 "
               >
@@ -112,8 +112,8 @@ export default function Footer() {
               <Link
                 href="/profile"
                 className="
-                  text-[#6B6B6B]
-                  hover:text-[#7A0019]
+                  text-[#F8F3EA]/80
+                  hover:text-[#D4A857]
                   transition
                 "
               >
@@ -129,7 +129,7 @@ export default function Footer() {
               className="
                 font-brand
                 text-3xl
-                text-[#2A2A2A]
+                text-[#D4A857]
                 mb-6
               "
             >
@@ -141,7 +141,7 @@ export default function Footer() {
                 flex
                 flex-col
                 gap-4
-                text-[#6B6B6B]
+                text-[#F8F3EA]/80
               "
             >
               <p>
@@ -170,14 +170,14 @@ export default function Footer() {
             mt-16
             pt-8
             border-t
-            border-[#E8DCC4]
+            border-[#5A0012]
             flex
             flex-col
             md:flex-row
             justify-between
             gap-4
             text-sm
-            text-[#6B6B6B]
+            text-[#F8F3EA]/60
           "
         >
           <p>
