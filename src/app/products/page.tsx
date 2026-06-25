@@ -129,7 +129,7 @@ export default async function ProductsPage({
             "
           >
             Explore handcrafted sarees and curated dress materials inspired by
-            India's rich textile heritage.
+            India&apos;s rich textile heritage.
           </p>
         </div>
 

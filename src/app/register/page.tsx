@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
+
 import { Loader2 } from "lucide-react";
 
 export default function RegisterPage() {
@@ -36,7 +36,7 @@ export default function RegisterPage() {
       } else {
         router.push("/login");
       }
-    } catch (err) {
+    } catch {
       setError("An unexpected error occurred");
     } finally {
       setLoading(false);

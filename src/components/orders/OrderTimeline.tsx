@@ -17,7 +17,7 @@ export default function OrderTimeline({ status }: { status: string }) {
             {!isLast && (
               <div
                 className={`
-                  absolute top-3 left-1/2 w-full h-[1px]
+                  absolute top-3 left-1/2 w-full h-px
                   ${index < currentIndex ? "bg-[#7A0019]" : "bg-[#E8DCC4]"}
                 `}
               />

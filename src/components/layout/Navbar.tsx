@@ -200,7 +200,7 @@ export default function Navbar() {
                 fixed
                 inset-0
                 bg-black/30
-                z-[90]
+                z-90
               "
             />
 
@@ -225,7 +225,7 @@ export default function Navbar() {
                 w-[85%]
                 max-w-[360px]
                 bg-[#7A0019]
-                z-[100]
+                z-100
                 p-8
               "
             >

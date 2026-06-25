@@ -214,7 +214,7 @@ export default async function ProductPage({
                 "
               >
                 Carefully curated products
-                celebrating India's rich
+                celebrating India&apos;s rich
                 textile heritage and
                 craftsmanship.
               </p>

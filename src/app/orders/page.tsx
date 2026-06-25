@@ -96,7 +96,7 @@ export default async function OrdersPage() {
                 </div>
 
                 {/* TIMELINE */}
-                <div className="px-8 py-8 border-b border-[#E8DCC4] overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                <div className="px-8 py-8 border-b border-[#E8DCC4] overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none">
                   <OrderTimeline status={order.status} />
                 </div>
 
@@ -163,7 +163,7 @@ export default async function OrdersPage() {
                   </Link>
                   <Link
                     href={`/invoice/${order.id}`}
-                    className="btn-primary text-sm !py-2.5 !px-5"
+                    className="btn-primary text-sm py-2.5! px-5!"
                   >
                     View Invoice
                   </Link>

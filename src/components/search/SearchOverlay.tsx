@@ -28,7 +28,7 @@ export default function SearchOverlay() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4 }}
-          className="fixed inset-0 z-[100] bg-[#F8F3EA]/95 backdrop-blur-md"
+          className="fixed inset-0 z-100 bg-[#F8F3EA]/95 backdrop-blur-md"
         >
           {/* CLOSE */}
           <button

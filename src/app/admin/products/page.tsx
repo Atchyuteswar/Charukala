@@ -122,7 +122,7 @@ export default async function AdminProductsPage() {
                           rounded-md
                           overflow-hidden
                           bg-[#F8F3EA]
-                          flex-shrink-0
+                          shrink-0
                           border
                           border-[#E8DCC4]
                           "
@@ -249,7 +249,7 @@ export default async function AdminProductsPage() {
             "
           >
             No products found.
-            Click "Add Product" to
+            Click &quot;Add Product&quot; to
             create one.
           </div>
         )}

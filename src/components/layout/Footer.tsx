@@ -175,6 +175,7 @@ export default function Footer() {
             flex-col
             md:flex-row
             justify-between
+            items-center
             gap-4
             text-sm
             text-[#F8F3EA]/60
@@ -184,9 +185,21 @@ export default function Footer() {
             © 2026 Charukala. All Rights Reserved.
           </p>
 
-          <p>
-            Crafted with elegance in India.
-          </p>
+          <div className="flex items-center gap-4 md:gap-8">
+            <p>
+              Crafted with elegance in India.
+            </p>
+            <div className="flex items-center gap-2">
+              <span>Powered by</span>
+              <Image
+                src="/sklogo.png"
+                alt="Powered by"
+                width={80}
+                height={30}
+                className="h-8 w-auto object-contain"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </footer>
