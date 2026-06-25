@@ -190,7 +190,7 @@ export default function Footer() {
               Crafted with elegance in India.
             </p>
             <div className="flex items-center gap-2">
-              <span>Powered by</span>
+              <span>Powered by</span> <Link href="https://www.srikalpavriksha.com/" target="_blank">SKCW</Link>
               <Image
                 src="/sklogo.png"
                 alt="Powered by"
